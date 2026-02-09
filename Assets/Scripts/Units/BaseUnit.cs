@@ -3,27 +3,28 @@ using UnityEngine;
 public class BaseUnit : MonoBehaviour
 {
     [SerializeField]
-    private string unitName;
+    protected string unitName;
 
     [SerializeField]
-    private float maxHealth;
+    protected float maxHealth;
 
     [SerializeField]
-    private float currentHealth;
+    protected float currentHealth;
 
     [SerializeField]
-    private float moveSpeed;
+    protected float moveSpeed;
 
     [SerializeField]
-    private bool isDead;
+    protected bool isDead;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         currentHealth = maxHealth;
         isDead = false;
+        Debug.Log("BaseUnit의 Awake 호출!!");
     }
 
-    public void TakeDamage(float damageAmount)
+    public virtual void TakeDamage(float damageAmount)
     {
         if (isDead == true)
         {
@@ -36,13 +37,17 @@ public class BaseUnit : MonoBehaviour
         {
             Die();
         }
+
+        Debug.Log("BaseUnit의 TakeDamage 호출!!");
     }
 
-    void Die()
+    protected virtual void Die()
     {
         isDead = true;
 
         // 추후 오브젝트 풀링을 추가할 것에 대비해 파괴하지 않고 비활성화만 시켜둠.
         gameObject.SetActive(false);
+
+        Debug.Log("BaseUnit의 Die 호출!!");
     }
 }
