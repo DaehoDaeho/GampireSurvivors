@@ -24,6 +24,10 @@ public class BaseUnit : MonoBehaviour
         Debug.Log("BaseUnit의 Awake 호출!!");
     }
 
+    /// <summary>
+    /// 대미지 적용.
+    /// </summary>
+    /// <param name="damageAmount">대미지 양</param>
     public virtual void TakeDamage(float damageAmount)
     {
         if (isDead == true)
@@ -45,9 +49,19 @@ public class BaseUnit : MonoBehaviour
     {
         isDead = true;
 
-        // 추후 오브젝트 풀링을 추가할 것에 대비해 파괴하지 않고 비활성화만 시켜둠.
+        /* 추후 오브젝트 풀링을 추가할 것에 대비해
+        파괴하지 않고 비활성화만 시켜둠. */
         gameObject.SetActive(false);
 
         Debug.Log("BaseUnit의 Die 호출!!");
+    }
+
+    /// <summary>
+    /// 이름을 반환하는 함수.
+    /// </summary>
+    /// <returns>이름</returns>
+    public string GetName()
+    {
+        return unitName;
     }
 }
