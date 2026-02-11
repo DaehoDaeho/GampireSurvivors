@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isGameOver;
     [SerializeField] private int targetScore;
 
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,6 +29,16 @@ public class GameManager : MonoBehaviour
         if (isGameOver == false)
         {
             UpdateGameTime();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O) == true)
+        {
+            UIManager.Instance.OpenUI(UIType.GameOver);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P) == true)
+        {
+            UIManager.Instance.CloseUI(UIType.GameOver);
         }
     }
 
