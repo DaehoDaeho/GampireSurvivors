@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
-    private Vector2 inputVec;   // 입력받은 방향을 저장할 변수.
+    public Vector2 inputVec;   // 입력받은 방향을 저장할 변수.
 
     private void Awake()
     {
