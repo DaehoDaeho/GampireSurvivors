@@ -64,4 +64,14 @@ public class BaseUnit : MonoBehaviour
     {
         return unitName;
     }
+
+    public float GetMoveSpeed()
+    {
+        return moveSpeed;
+    }
+
+    public bool GetIsDead()
+    {
+        return isDead;
+    }
 }
