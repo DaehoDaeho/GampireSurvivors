@@ -19,9 +19,19 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void Awake()
     {
+        //Init();
+        Debug.Log("BaseUnit의 Awake 호출!!");
+    }
+
+    public void Init()
+    {
         currentHealth = maxHealth;
         isDead = false;
-        Debug.Log("BaseUnit의 Awake 호출!!");
+    }
+
+    protected virtual void OnEnable()
+    {
+        Init();
     }
 
     /// <summary>

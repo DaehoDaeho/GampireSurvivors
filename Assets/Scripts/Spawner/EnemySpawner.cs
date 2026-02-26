@@ -42,7 +42,13 @@ public class EnemySpawner : MonoBehaviour
 
         // 계산된 위치에 적 프리팹을 생성.
         // 추후에 오브젝트 풀링을 사용하는 방식으로 개선해 볼 것.
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        //Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        if(PoolManager.instance != null)
+        {
+            GameObject enemy = PoolManager.instance.GetEnemy();
+            enemy.transform.position = spawnPosition;
+            enemy.transform.rotation = Quaternion.identity;
+        }
     }
 
     void OnDrawGizmos()

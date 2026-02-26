@@ -26,9 +26,18 @@ public class AutoShooter : MonoBehaviour
 
     void FireProjectile(Transform target)
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        if(PoolManager.instance == null)
+        {
+            return;
+        }
+
+        //GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);        
+        GameObject projectile = PoolManager.instance.GetProjectile();
         if(projectile != null)
         {
+            projectile.transform.position = transform.position;
+            projectile.transform.rotation = Quaternion.identity;
+
             Projectile proj = projectile.GetComponent<Projectile>();
             if(proj != null)
             {

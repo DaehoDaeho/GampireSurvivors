@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -28,7 +29,11 @@ public class Projectile : MonoBehaviour
         float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        Destroy(gameObject, 3.0f);
+        //Destroy(gameObject, 3.0f);
+
+        // 지정한 시간이 지난 후 문자열로 지정된 이름의 함수를 호출하도록 예약.
+        Invoke("ReturnToPool", 3.0f);
+        //StartCoroutine("ReturnToQueue", 3.0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,6 +47,26 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+
+        // 예약한 Invoke를 취소하는 함수.
+        CancelInvoke("ReturnToPool");
+        //StopCoroutine("ReturnToQueue");
+        ReturnToPool();
+    }
+
+    void ReturnToPool()
+    {
+        if(PoolManager.instance != null)
+        {
+            PoolManager.instance.ReturnProjectile(gameObject);
+        }
+    }
+
+    IEnumerator ReturnToQueue(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        ReturnToPool();
     }
 }
