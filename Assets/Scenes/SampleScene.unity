@@ -1522,6 +1522,7 @@ MonoBehaviour:
   playTime: 0
   isGameOver: 0
   targetScore: 0
+  enemyDatabase: {fileID: 11400000, guid: ea7925916a9edbb4cb4c342c02f70857, type: 2}
   player: {fileID: 1200021467}
 --- !u!1 &998802403
 GameObject:

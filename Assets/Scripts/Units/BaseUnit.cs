@@ -19,7 +19,6 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void Awake()
     {
-        //Init();
         Debug.Log("BaseUnit¿« Awake »£√‚!!");
     }
 
@@ -31,7 +30,7 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        Init();
+        
     }
 
     /// <summary>

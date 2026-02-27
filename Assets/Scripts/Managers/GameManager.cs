@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float playTime;
     [SerializeField] private bool isGameOver;
     [SerializeField] private int targetScore;
+    [SerializeField] private EnemyDatabase enemyDatabase;
+    [SerializeField] private ProjectileDatabase projectileDatabase;
 
     public static GameManager Instance;
 
@@ -17,12 +19,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -64,5 +60,27 @@ public class GameManager : MonoBehaviour
     void EndGame()
     {
         isGameOver = true;
+    }
+
+    public EnemyData GetEnemyData(int targetID)
+    {
+        if(enemyDatabase != null)
+        {
+            // EnemyData enemyData = enemyDatabase.GetEnemyData(targetID);
+            // return enemyData;
+            return enemyDatabase.GetEnemyData(targetID);
+        }
+
+        return null;
+    }
+
+    public ProjectileData GetProjectileData(int targetID)
+    {
+        if (projectileDatabase != null)
+        {
+            return projectileDatabase.GetProjectileData(targetID);
+        }
+
+        return null;
     }
 }

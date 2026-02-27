@@ -4,10 +4,13 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 10.0f;
+    private int projectildID;
 
     [SerializeField]
-    private float damage = 10.0f;
+    private float moveSpeed;
+
+    [SerializeField]
+    private float damage;
 
     private Vector2 moveDirection;
 
@@ -20,6 +23,21 @@ public class Projectile : MonoBehaviour
 
     public void Setup(Vector3 targetPosition)
     {
+        if(GameManager.Instance != null)
+        {
+            ProjectileData projectileData = GameManager.Instance.GetProjectileData(projectildID);
+            if(projectileData != null)
+            {
+                moveSpeed = projectileData.moveSpeed;
+                damage = projectileData.damage;
+            }
+            else
+            {
+                moveSpeed = 10.0f;
+                damage = 10.0f;
+            }
+        }
+
         Vector2 direction = targetPosition - transform.position;
         moveDirection = direction.normalized;
 

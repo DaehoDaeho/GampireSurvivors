@@ -9,17 +9,17 @@ public class Enemy : BaseUnit
     [SerializeField]
     private Image imageHPBar;
 
+    [SerializeField]
+    private int enemyID;
+
     protected override void Awake()
     {
-        base.Awake();
-
-        dropExp = 10;
-        unitName = "Slime";
+        SetupEnemyData();
     }
 
     protected override void OnEnable()
     {
-        base.OnEnable();
+        Init();
 
         UpdateHPBar();
     }
@@ -68,5 +68,20 @@ public class Enemy : BaseUnit
         }
 
         imageHPBar.fillAmount = currentHealth / maxHealth;
+    }
+
+    public void SetupEnemyData()
+    {
+        if(GameManager.Instance != null)
+        {
+            EnemyData enemyData = GameManager.Instance.GetEnemyData(enemyID);
+            if(enemyData != null)
+            {
+                maxHealth = enemyData.maxHealth;
+                unitName = enemyData.enemyName;
+                moveSpeed = enemyData.moveSpeed;
+                dropExp = enemyData.dropEXP;
+            }
+        }
     }
 }
