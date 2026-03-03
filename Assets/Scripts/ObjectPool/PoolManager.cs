@@ -12,13 +12,20 @@ public class PoolManager : MonoBehaviour
     private GameObject projectilePrefab;
 
     [SerializeField]
+    private GameObject expGemPrefab;
+
+    [SerializeField]
     private int enemyCount = 50;
 
     [SerializeField]
     private int projectileCount = 50;
 
+    [SerializeField]
+    private int expGemCount = 50;
+
     private Queue<GameObject> enemyQueue = new Queue<GameObject>();
     private Queue<GameObject> projectileQueue = new Queue<GameObject>();
+    private Queue<GameObject> expGemQueue = new Queue<GameObject>();
 
     private void Awake()
     {
@@ -38,6 +45,14 @@ public class PoolManager : MonoBehaviour
             GameObject go = Instantiate(projectilePrefab, transform);
             go.SetActive(false);
             projectileQueue.Enqueue(go); // 큐에 추가.
+        }
+
+        for (int i = 0; i < expGemCount; ++i)
+        {
+            // 경험치 구슬 객체를 생성해서 PoolManager 오브젝트의 자식으로 배치.
+            GameObject go = Instantiate(expGemPrefab, transform);
+            go.SetActive(false);
+            expGemQueue.Enqueue(go); // 큐에 추가.
         }
     }
 
@@ -85,5 +100,25 @@ public class PoolManager : MonoBehaviour
     {
         projectile.SetActive(false);
         projectileQueue.Enqueue(projectile);
+    }
+
+    public GameObject GetExpGem()
+    {
+        if (expGemQueue.Count > 0)
+        {
+            GameObject expGem = expGemQueue.Dequeue();
+            expGem.SetActive(true);
+            return expGem;
+        }
+
+        GameObject expGem2 = Instantiate(expGemPrefab, transform);
+        expGem2.SetActive(true);
+        return expGem2;
+    }
+
+    public void ReturnExpGem(GameObject expGem)
+    {
+        expGem.SetActive(false);
+        expGemQueue.Enqueue(expGem);
     }
 }

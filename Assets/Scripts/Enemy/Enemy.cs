@@ -12,6 +12,9 @@ public class Enemy : BaseUnit
     [SerializeField]
     private int enemyID;
 
+    [SerializeField]
+    private int[] randomExp = new int[3] { 10, 20, 30 };
+
     protected override void Awake()
     {
         SetupEnemyData();
@@ -44,6 +47,20 @@ public class Enemy : BaseUnit
 
         if(PoolManager.instance != null)
         {
+            GameObject expGem = PoolManager.instance.GetExpGem();
+            if (expGem != null)
+            {
+                expGem.transform.position = transform.position;
+                expGem.transform.rotation = Quaternion.identity;
+
+                ExpGem gem = expGem.GetComponent<ExpGem>();
+                if(gem != null)
+                {
+                    int index = Random.Range(0, randomExp.Length);
+                    gem.SetExpData(randomExp[index]);
+                }
+            }
+
             PoolManager.instance.ReturnEnemy(gameObject);
         }
 

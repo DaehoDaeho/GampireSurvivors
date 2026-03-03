@@ -56,6 +56,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.CompareTag("Player") == true)
+        {
+            return;
+        }
+
         if(collision.CompareTag("Enemy") == true)
         {
             BaseUnit hitUnit = collision.GetComponent<BaseUnit>();

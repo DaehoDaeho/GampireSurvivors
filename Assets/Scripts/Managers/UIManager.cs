@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public enum UIType
 {
@@ -13,6 +15,12 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private UIBase[] uis;
+
+    [SerializeField]
+    private Image imageExpBar;
+
+    [SerializeField]
+    private TMP_Text textLevel; 
 
     private void Awake()
     {
@@ -32,5 +40,15 @@ public class UIManager : MonoBehaviour
             currentOpenedUI.CloseUI();
             currentOpenedUI = null;
         }
+    }
+
+    public void UpdateExpBar(float percent)
+    {
+        imageExpBar.fillAmount = percent;
+    }
+
+    public void UpdateLevel(int level)
+    {
+        textLevel.text = "LV " + level.ToString();
     }
 }
