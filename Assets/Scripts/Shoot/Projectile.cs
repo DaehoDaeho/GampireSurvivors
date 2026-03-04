@@ -21,22 +21,15 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime, Space.Self);
     }
 
-    public void Setup(Vector3 targetPosition)
+    public int GetID()
     {
-        if(GameManager.Instance != null)
-        {
-            ProjectileData projectileData = GameManager.Instance.GetProjectileData(projectildID);
-            if(projectileData != null)
-            {
-                moveSpeed = projectileData.moveSpeed;
-                damage = projectileData.damage;
-            }
-            else
-            {
-                moveSpeed = 10.0f;
-                damage = 10.0f;
-            }
-        }
+        return projectildID;
+    }
+
+    public void Setup(Vector3 targetPosition, float speed, float damage)
+    {
+        moveSpeed = speed;
+        this.damage = damage;
 
         Vector2 direction = targetPosition - transform.position;
         moveDirection = direction.normalized;

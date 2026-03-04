@@ -13,6 +13,12 @@ public class AutoShooter : MonoBehaviour
 
     private float attackTimer = 0.0f;
 
+    [SerializeField]
+    private float upgradeDamage = 0.0f;
+
+    [SerializeField]
+    private float upgradeMoveSpeed = 0.0f;
+
     // Update is called once per frame
     void Update()
     {
@@ -41,13 +47,26 @@ public class AutoShooter : MonoBehaviour
             Projectile proj = projectile.GetComponent<Projectile>();
             if(proj != null)
             {
-                proj.Setup(target.position);
+                ProjectileData projectileData = GameManager.Instance.GetProjectileData(proj.GetID());
+                float damage = projectileData.damage + upgradeDamage;
+                float moveSpeed = projectileData.moveSpeed + upgradeMoveSpeed;
+                proj.Setup(target.position, moveSpeed, damage);
             }
             else
             {
                 Destroy(projectile);
             }
         }
+    }
+
+    public void SetUpgradeMoveSpeed(float speed)
+    {
+        upgradeMoveSpeed += speed;
+    }
+
+    public void SetUpgradeDamage(float damage)
+    {
+        upgradeDamage += damage;
     }
 
     void FindAndAttack()

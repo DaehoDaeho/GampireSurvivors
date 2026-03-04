@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public PlayerController player;
+    public AutoShooter autoShooter;
 
     private void Awake()
     {

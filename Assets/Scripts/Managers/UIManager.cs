@@ -4,7 +4,8 @@ using TMPro;
 
 public enum UIType
 {
-    GameOver = 0
+    GameOver = 0,
+    Upgrade = 1
 }
 
 public class UIManager : MonoBehaviour

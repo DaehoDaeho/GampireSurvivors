@@ -64,4 +64,9 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", move);
         }
     }
+
+    public void SetUpgradeMoveSpeed(float speed)
+    {
+        moveSpeed += speed;
+    }
 }

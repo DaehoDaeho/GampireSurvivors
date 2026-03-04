@@ -74,5 +74,7 @@ public class Player : BaseUnit
         maxExp = (int)(maxExp * 1.5f);
 
         UIManager.Instance.UpdateLevel(currentLevel);
+
+        UIManager.Instance.OpenUI(UIType.Upgrade);
     }
 }
