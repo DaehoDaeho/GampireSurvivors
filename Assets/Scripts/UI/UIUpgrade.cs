@@ -27,6 +27,9 @@ public class UIUpgrade : UIBase
     {
         List<UpgradeData> datas = upgradeDatabase.GetCopyDataList();
 
+        // Clear() : 리스트 전체를 초기화하는 함수.
+        upgradeDatas.Clear();
+
         for(int i=0; i<imageThumbnail.Length; ++i)
         {
             int index = Random.Range(0, datas.Count);
@@ -63,6 +66,7 @@ public class UIUpgrade : UIBase
         }
 
         UIManager.Instance.CloseUI(UIType.Upgrade);
+        GameManager.Instance.UpdateUpgradeInfo(upgradeDatas[index]);
         Time.timeScale = 1.0f;
     }
 }

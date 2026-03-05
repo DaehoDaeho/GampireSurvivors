@@ -10,12 +10,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isGameOver;
     [SerializeField] private int targetScore;
     [SerializeField] private EnemyDatabase enemyDatabase;
-    [SerializeField] private ProjectileDatabase projectileDatabase;
+    [SerializeField] private ProjectileDatabase projectileDatabase;    
 
     public static GameManager Instance;
 
     public PlayerController player;
     public AutoShooter autoShooter;
+
+    [SerializeField] private UpgradeInfo upgradeInfo;
 
     private void Awake()
     {
@@ -83,5 +85,13 @@ public class GameManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void UpdateUpgradeInfo(UpgradeData data)
+    {
+        if(upgradeInfo != null)
+        {
+            upgradeInfo.UpdateUpgradeInfo(data);
+        }
     }
 }
