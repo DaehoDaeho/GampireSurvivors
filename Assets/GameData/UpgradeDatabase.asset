@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeDataList:
   - upgradeType: 0
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: 6825437759406217638, guid: 9e070c281aadcbb4fae4ceaf313ad5e0, type: 3}
     description: "\uCE90\uB9AD\uD130\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C 0.25 \uC62C\uB824\uC900\uB2E4."
     upgradeValue: 0.25
   - upgradeType: 1
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: -1093715740636463925, guid: 9be89faf621a21c44b0ecffda81dd752, type: 3}
     description: "\uCD1D\uC54C\uC758 \uB370\uBBF8\uC9C0\uB97C 2 \uC62C\uB824\uC900\uB2E4."
     upgradeValue: 2
   - upgradeType: 2
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: -5432176002854289831, guid: 137f734b9416a6c49870934104b1c292, type: 3}
     description: "\uCD1D\uC54C\uC758 \uC18D\uB3C4\uB97C 2 \uC62C\uB824\uC900\uB2E4."
     upgradeValue: 2
