@@ -1,16 +1,33 @@
 using System.Collections;
 using UnityEngine;
 
+public enum ProjectileType
+{
+    Normal = 0,
+    Slow = 1,
+    Burn = 2,
+    Freeze = 3
+}
+
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private int projectildID;
 
     [SerializeField]
+    private ProjectileType projectileType;
+
+    [SerializeField]
     private float moveSpeed;
 
     [SerializeField]
     private float damage;
+
+    [SerializeField]
+    private bool applyNormalDamage = true;
+
+    [SerializeField]
+    private bool useObjectPooling = true;
 
     private Vector2 moveDirection;
 
@@ -54,21 +71,89 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        if(collision.CompareTag("Enemy") == true)
+        if(applyNormalDamage == true)
         {
-            BaseUnit hitUnit = collision.GetComponent<BaseUnit>();
-            if(hitUnit != null)
+            if (collision.CompareTag("Enemy") == true)
             {
-                hitUnit.TakeDamage(damage);
+                BaseUnit hitUnit = collision.GetComponent<BaseUnit>();
+                if (hitUnit != null)
+                {
+                    hitUnit.TakeDamage(damage);
+                }
+
+                ApplyStatusEffect(collision);
             }
         }
+        else
+        {
+            if (collision.CompareTag("Enemy") == true)
+            {
+                if(projectileType == ProjectileType.Normal)
+                {
+                    BaseUnit hitUnit = collision.GetComponent<BaseUnit>();
+                    if (hitUnit != null)
+                    {
+                        hitUnit.TakeDamage(damage);
+                    }
+                }
+                else
+                {
+                    ApplyStatusEffect(collision);
+                }
+            }
+        }
+        
 
         //Destroy(gameObject);
 
         // 예약한 Invoke를 취소하는 함수.
         CancelInvoke("ReturnToPool");
         //StopCoroutine("ReturnToQueue");
-        ReturnToPool();
+
+        if(useObjectPooling == true)
+        {
+            ReturnToPool();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void ApplyStatusEffect(Collider2D collision)
+    {
+        switch (projectileType)
+        {
+            case ProjectileType.Slow:
+                {
+                    Enemy enemy = collision.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.ApplySlow(3.0f, 0.5f);
+                    }
+                }
+                break;
+
+            case ProjectileType.Burn:
+                {
+                    Enemy enemy = collision.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.ApplyBurn(3.0f, 10.0f);
+                    }
+                }
+                break;
+
+            case ProjectileType.Freeze:
+                {
+                    Enemy enemy = collision.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.ApplyFreeze(3.0f);
+                    }
+                }
+                break;
+        }
     }
 
     void ReturnToPool()

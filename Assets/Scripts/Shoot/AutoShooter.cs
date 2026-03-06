@@ -6,6 +6,9 @@ public class AutoShooter : MonoBehaviour
     private GameObject projectilePrefab;
 
     [SerializeField]
+    private GameObject[] statusEffectProjectilePrefab;
+
+    [SerializeField]
     private float attackInterval = 0.5f;
 
     [SerializeField]
@@ -18,6 +21,8 @@ public class AutoShooter : MonoBehaviour
 
     [SerializeField]
     private float upgradeMoveSpeed = 0.0f;
+
+    private int shootCount = 0;
 
     // Update is called once per frame
     void Update()
@@ -37,24 +42,42 @@ public class AutoShooter : MonoBehaviour
             return;
         }
 
-        //GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);        
-        GameObject projectile = PoolManager.instance.GetProjectile();
-        if(projectile != null)
+        //GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        if(shootCount == 0 || shootCount % 5 != 0)
         {
-            projectile.transform.position = transform.position;
-            projectile.transform.rotation = Quaternion.identity;
+            shootCount++;
+            GameObject projectile = PoolManager.instance.GetProjectile();
+            if (projectile != null)
+            {
+                projectile.transform.position = transform.position;
+                projectile.transform.rotation = Quaternion.identity;
 
+                Projectile proj = projectile.GetComponent<Projectile>();
+                if (proj != null)
+                {
+                    ProjectileData projectileData = GameManager.Instance.GetProjectileData(proj.GetID());
+                    float damage = projectileData.damage + upgradeDamage;
+                    float moveSpeed = projectileData.moveSpeed + upgradeMoveSpeed;
+                    proj.Setup(target.position, moveSpeed, damage);
+                }
+                else
+                {
+                    Destroy(projectile);
+                }
+            }
+        }
+        else
+        {
+            shootCount++;
+            int index = Random.Range(0, statusEffectProjectilePrefab.Length);
+            GameObject projectile = Instantiate(statusEffectProjectilePrefab[index], transform.position, Quaternion.identity);
             Projectile proj = projectile.GetComponent<Projectile>();
-            if(proj != null)
+            if (proj != null)
             {
                 ProjectileData projectileData = GameManager.Instance.GetProjectileData(proj.GetID());
                 float damage = projectileData.damage + upgradeDamage;
                 float moveSpeed = projectileData.moveSpeed + upgradeMoveSpeed;
                 proj.Setup(target.position, moveSpeed, damage);
-            }
-            else
-            {
-                Destroy(projectile);
             }
         }
     }

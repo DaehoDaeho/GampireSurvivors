@@ -189,6 +189,9 @@ MonoBehaviour:
   dropExp: 0
   imageHPBar: {fileID: 2651913759609568277}
   enemyID: 1000
+  randomExp: 0a000000140000001e000000
+  originMoveSpeed: 0
+  spriteRenderer: {fileID: 2450454905427732777}
 --- !u!114 &3820293898213684711
 MonoBehaviour:
   m_ObjectHideFlags: 0

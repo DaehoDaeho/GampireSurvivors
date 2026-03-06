@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,14 +16,36 @@ public class Enemy : BaseUnit
     [SerializeField]
     private int[] randomExp = new int[3] { 10, 20, 30 };
 
+    [SerializeField]
+    private float originMoveSpeed;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    private Coroutine slowCoroutine;
+    private Coroutine burnCoroutine;
+    private Coroutine freezeCoroutine;
+
+
     protected override void Awake()
     {
         SetupEnemyData();
+        originMoveSpeed = moveSpeed;
     }
 
     protected override void OnEnable()
     {
         Init();
+
+        moveSpeed = originMoveSpeed;
+        spriteRenderer.color = Color.white;
+
+        // 실행중인 모든 코루틴을 중단.
+        StopAllCoroutines();
+
+        slowCoroutine = null;
+        burnCoroutine = null;
+        freezeCoroutine = null;
 
         UpdateHPBar();
     }
@@ -100,5 +123,83 @@ public class Enemy : BaseUnit
                 dropExp = enemyData.dropEXP;
             }
         }
+    }
+
+    public void ApplySlow(float duration, float penaltyPercent)
+    {
+        // 이미 실행중인 상태 이상 효과가 있다면 취소시키기.
+        if(slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+
+        slowCoroutine = StartCoroutine(SlowRoutine(duration, penaltyPercent));
+    }
+
+    IEnumerator SlowRoutine(float duration, float penaltyPercent)
+    {
+        // 속도 감소 적용 (예 : penaltyPercent가 0.5면 속도가 50% 감소)
+        moveSpeed = originMoveSpeed * (1.0f - penaltyPercent);
+
+        // 시각적 효과를 주고 싶을 경우 SpriteRenderer의 색상을 변경.
+        spriteRenderer.color = Color.grey;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originMoveSpeed;
+        spriteRenderer.color = Color.white;
+        slowCoroutine = null;
+    }
+
+    public void ApplyBurn(float duration, float damagePerSecond)
+    {
+        if(burnCoroutine != null)
+        {
+            StopCoroutine(burnCoroutine);
+        }
+
+        burnCoroutine = StartCoroutine(BurnRoutine(duration, damagePerSecond));
+    }
+
+    IEnumerator BurnRoutine(float duration, float damagePerSecond)
+    {
+        float elapsed = 0.0f;
+
+        while(elapsed < duration)
+        {
+            TakeDamage(damagePerSecond);
+            spriteRenderer.color = Color.red;
+
+            yield return new WaitForSeconds(0.5f);
+
+            spriteRenderer.color = Color.white;
+
+            yield return new WaitForSeconds(0.5f);
+            elapsed++;
+        }
+
+        burnCoroutine = null;
+    }
+
+    public void ApplyFreeze(float duration)
+    {
+        if(freezeCoroutine != null)
+        {
+            StopCoroutine(freezeCoroutine);
+        }
+
+        freezeCoroutine = StartCoroutine(FreezeRoutine(duration));
+    }
+
+    IEnumerator FreezeRoutine(float duration)
+    {
+        moveSpeed = 0.0f;
+        spriteRenderer.color = Color.cyan;
+
+        yield return new WaitForSeconds(duration);
+
+        moveSpeed = originMoveSpeed;
+        spriteRenderer.color = Color.white;
+        freezeCoroutine = null;
     }
 }

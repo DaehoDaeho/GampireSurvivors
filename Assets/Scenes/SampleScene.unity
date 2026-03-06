@@ -3417,6 +3417,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 907327410562928689, guid: 5bc33ca95d881f3469f34f84d353a6ba, type: 3}
+  statusEffectProjectilePrefab:
+  - {fileID: 907327410562928689, guid: b121c44d5c317e74db605737a2e510d1, type: 3}
+  - {fileID: 907327410562928689, guid: 7466d5d1a109a4a409a100a8b561590a, type: 3}
+  - {fileID: 907327410562928689, guid: c36694bc6974dd04ab761b7840f13770, type: 3}
   attackInterval: 0.25
   attackRange: 8
   upgradeDamage: 0
