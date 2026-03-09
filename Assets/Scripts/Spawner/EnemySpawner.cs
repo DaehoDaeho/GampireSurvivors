@@ -3,57 +3,52 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemyPrefab;
+    private WaveDatabase waveData;
 
     [SerializeField]
-    private float spawnInterval = 1.0f;
+    private int currentWaveIndex;
 
     [SerializeField]
-    private float spawnRadius = 15.0f;
+    private float timer;
 
-    private float currentTime = 0.0f;
-
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        currentTime += Time.deltaTime;
+        currentWaveIndex = 0;
+        timer = 0.0f;
+    }
 
-        if(currentTime >= spawnInterval)
+    private void Update()
+    {
+        // 웨이브 넘기기 처리와 몬스터 스폰 처리.
+        float gameTime = GameManager.Instance.GetPlayTime();
+
+        // 현재 웨이브가 마지막 웨이브가 아니면.
+        if(currentWaveIndex < waveData.waves.Count - 1)
         {
-            SpawnEnemy();
-            currentTime = 0.0f;
+            // 다음 웨이브로 넘어갈 시간이 됐는지 체크.
+            if(gameTime >= waveData.waves[currentWaveIndex+1].startTime)
+            {
+                currentWaveIndex++;
+            }
         }
+
+        SpawnEnemy();
     }
 
     void SpawnEnemy()
     {
-        if(GameManager.Instance == null || GameManager.Instance.player == null)
-        {
-            return;
-        }
+        timer += Time.deltaTime;
+        WaveData currentWave = waveData.waves[currentWaveIndex];
 
-        // 방향 설정.
-        // 반지름이 1인 원 내부에서 랜덤한 좌표값을 반환하고 그 좌표값을 정규화한다.
-        Vector2 randomDirection = Random.insideUnitCircle.normalized;
-
-        // 최종 스폰 위치 계산 = 플레이어 위치 + (무작위 방향 * 스폰 반지름)
-        Vector3 playerPos = GameManager.Instance.player.transform.position;
-        Vector3 spawnPosition = playerPos + (Vector3)(randomDirection * spawnRadius);
-
-        // 계산된 위치에 적 프리팹을 생성.
-        // 추후에 오브젝트 풀링을 사용하는 방식으로 개선해 볼 것.
-        //Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-        if(PoolManager.instance != null)
+        if(timer >= currentWave.spawnInterval)
         {
             GameObject enemy = PoolManager.instance.GetEnemy();
-            enemy.transform.position = spawnPosition;
-            enemy.transform.rotation = Quaternion.identity;
-        }
-    }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, spawnRadius);
+            // 플레이어의 중심으로부터 15미터 반경 밖의 한 점을 랜덤하게 설정해서 적의 생성위치를 지정.
+            Vector2 randomDir = Random.insideUnitCircle.normalized;
+            enemy.transform.position = GameManager.Instance.player.transform.position + (Vector3)(randomDir * 15.0f);
+
+            timer = 0.0f;
+        }
     }
 }

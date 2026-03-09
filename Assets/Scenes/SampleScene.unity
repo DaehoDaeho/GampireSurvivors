@@ -1636,9 +1636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbbf736dbf1cde6419f95adbb8806f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6047330645210312502, guid: 8d4b4ec2d54280a4aaf6070141aa3c2b, type: 3}
-  spawnInterval: 1
-  spawnRadius: 15
+  waveData: {fileID: 11400000, guid: 31c5e502111f7d14cabf346d0973abac, type: 2}
+  currentWaveIndex: 0
+  timer: 0
 --- !u!1 &806718918
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,9 +3101,11 @@ MonoBehaviour:
   enemyPrefab: {fileID: 6047330645210312502, guid: 8d4b4ec2d54280a4aaf6070141aa3c2b, type: 3}
   projectilePrefab: {fileID: 907327410562928689, guid: 5bc33ca95d881f3469f34f84d353a6ba, type: 3}
   expGemPrefab: {fileID: 6636009506239068976, guid: af730c6342700384ab8b497f3253d7d1, type: 3}
+  damageTextPrefab: {fileID: 3673563140080973061, guid: 946252bc67e420644a33b00953528786, type: 3}
   enemyCount: 50
   projectileCount: 50
   expGemCount: 50
+  damageTextCount: 100
 --- !u!4 &1168825925
 Transform:
   m_ObjectHideFlags: 0

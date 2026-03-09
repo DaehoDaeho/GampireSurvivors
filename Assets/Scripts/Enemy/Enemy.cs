@@ -54,6 +54,20 @@ public class Enemy : BaseUnit
     {
         base.TakeDamage(damageAmount);
 
+        // 데미지 텍스트 출력.
+        GameObject go = PoolManager.instance.GetDamageText();
+        if(go != null)
+        {
+            // 출력 위치 설정.
+            go.transform.position = transform.position;
+
+            DamageText damageText = go.GetComponent<DamageText>();
+            if(damageText != null)
+            {
+                damageText.SetDamage(damageAmount);
+            }
+        }
+
         UpdateHPBar();
 
         if (isDead == true)

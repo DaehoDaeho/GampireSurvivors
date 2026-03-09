@@ -15,6 +15,9 @@ public class PoolManager : MonoBehaviour
     private GameObject expGemPrefab;
 
     [SerializeField]
+    private GameObject damageTextPrefab;
+
+    [SerializeField]
     private int enemyCount = 50;
 
     [SerializeField]
@@ -23,9 +26,13 @@ public class PoolManager : MonoBehaviour
     [SerializeField]
     private int expGemCount = 50;
 
+    [SerializeField]
+    private int damageTextCount = 100;
+
     private Queue<GameObject> enemyQueue = new Queue<GameObject>();
     private Queue<GameObject> projectileQueue = new Queue<GameObject>();
     private Queue<GameObject> expGemQueue = new Queue<GameObject>();
+    private Queue<GameObject> damageTextQueue = new Queue<GameObject>();
 
     private void Awake()
     {
@@ -53,6 +60,14 @@ public class PoolManager : MonoBehaviour
             GameObject go = Instantiate(expGemPrefab, transform);
             go.SetActive(false);
             expGemQueue.Enqueue(go); // 큐에 추가.
+        }
+
+        for (int i = 0; i < damageTextCount; ++i)
+        {
+            // 데미지 텍스트 객체를 생성해서 PoolManager 오브젝트의 자식으로 배치.
+            GameObject go = Instantiate(damageTextPrefab, transform);
+            go.SetActive(false);
+            damageTextQueue.Enqueue(go); // 큐에 추가.
         }
     }
 
@@ -120,5 +135,25 @@ public class PoolManager : MonoBehaviour
     {
         expGem.SetActive(false);
         expGemQueue.Enqueue(expGem);
+    }
+
+    public GameObject GetDamageText()
+    {
+        if (damageTextQueue.Count > 0)
+        {
+            GameObject damageText = damageTextQueue.Dequeue();
+            damageText.SetActive(true);
+            return damageText;
+        }
+
+        GameObject damageText2 = Instantiate(damageTextPrefab, transform);
+        damageText2.SetActive(true);
+        return damageText2;
+    }
+
+    public void ReturnDamageText(GameObject damageText)
+    {
+        damageText.SetActive(false);
+        damageTextQueue.Enqueue(damageText);
     }
 }
