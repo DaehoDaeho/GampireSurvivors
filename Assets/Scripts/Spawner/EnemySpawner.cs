@@ -11,6 +11,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float timer;
 
+    [SerializeField]
+    private GameObject bossPrefab;
+
+    private bool bossSpawnedInCurrentWave = false;
+
     private void Awake()
     {
         currentWaveIndex = 0;
@@ -29,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
             if(gameTime >= waveData.waves[currentWaveIndex+1].startTime)
             {
                 currentWaveIndex++;
+                bossSpawnedInCurrentWave = false;
+                timer = 0.0f;
             }
         }
 
@@ -40,15 +47,33 @@ public class EnemySpawner : MonoBehaviour
         timer += Time.deltaTime;
         WaveData currentWave = waveData.waves[currentWaveIndex];
 
-        if(timer >= currentWave.spawnInterval)
+        if(currentWave.isBossWave == true)
         {
-            GameObject enemy = PoolManager.instance.GetEnemy();
-
-            // 플레이어의 중심으로부터 15미터 반경 밖의 한 점을 랜덤하게 설정해서 적의 생성위치를 지정.
-            Vector2 randomDir = Random.insideUnitCircle.normalized;
-            enemy.transform.position = GameManager.Instance.player.transform.position + (Vector3)(randomDir * 15.0f);
-
-            timer = 0.0f;
+            if(bossSpawnedInCurrentWave == false)
+            {
+                SpawnBoss();
+                bossSpawnedInCurrentWave = true;
+            }
         }
+        else
+        {
+            if (timer >= currentWave.spawnInterval)
+            {
+                GameObject enemy = PoolManager.instance.GetEnemy();
+
+                // 플레이어의 중심으로부터 15미터 반경 밖의 한 점을 랜덤하게 설정해서 적의 생성위치를 지정.
+                Vector2 randomDir = Random.insideUnitCircle.normalized;
+                enemy.transform.position = GameManager.Instance.player.transform.position + (Vector3)(randomDir * 15.0f);
+
+                timer = 0.0f;
+            }
+        }
+    }
+
+    void SpawnBoss()
+    {
+        GameObject boss = Instantiate(bossPrefab);
+        Vector2 randomDir = Random.insideUnitCircle.normalized;
+        boss.transform.position = GameManager.Instance.player.transform.position + (Vector3)(randomDir * 15.0f);
     }
 }

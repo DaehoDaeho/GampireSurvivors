@@ -7,6 +7,7 @@ public class WaveData
     public string waveName;
     public float startTime;
     public float spawnInterval;
+    public bool isBossWave;
 }
 
 [CreateAssetMenu(fileName = "WaveDatabase", menuName = "ScriptableObjects/WaveDatabase")]

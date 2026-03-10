@@ -21,11 +21,16 @@ public class UIManager : MonoBehaviour
     private Image imageExpBar;
 
     [SerializeField]
-    private TMP_Text textLevel; 
+    private TMP_Text textLevel;
+
+    [SerializeField]
+    private UIBossHP bossHP;
 
     private void Awake()
     {
         Instance = this;
+
+        bossHP.gameObject.SetActive(false);
     }
 
     public void OpenUI(UIType type)
@@ -51,5 +56,15 @@ public class UIManager : MonoBehaviour
     public void UpdateLevel(int level)
     {
         textLevel.text = "LV " + level.ToString();
+    }
+
+    public void SetBossHPVisible(bool visible)
+    {
+        bossHP.gameObject.SetActive(visible);
+    }
+
+    public void UpdateBossHP(float percent)
+    {
+        bossHP.UpdateHP(percent);
     }
 }

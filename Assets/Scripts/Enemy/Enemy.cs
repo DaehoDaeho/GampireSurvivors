@@ -20,7 +20,7 @@ public class Enemy : BaseUnit
     private float originMoveSpeed;
 
     [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     private Coroutine slowCoroutine;
     private Coroutine burnCoroutine;
@@ -115,6 +115,11 @@ public class Enemy : BaseUnit
 
     protected virtual void UpdateHPBar()
     {
+        if(imageHPBar == null)
+        {
+            return;
+        }
+
         if(currentHealth <= 0)
         {
             imageHPBar.fillAmount = 0.0f;
