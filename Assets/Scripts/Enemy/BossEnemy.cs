@@ -85,10 +85,12 @@ public class BossEnemy : Enemy
     {
         currentPhase = nextPhase;
         moveSpeed *= 1.5f;
+        originMoveSpeed = moveSpeed;
 
         if(spriteRenderer != null)
         {
             spriteRenderer.color = colorOnPhase[(int)currentPhase];
+            originSpriteColor = spriteRenderer.color;
         }
     }
 }

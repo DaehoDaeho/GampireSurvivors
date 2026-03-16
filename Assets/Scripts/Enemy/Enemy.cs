@@ -17,7 +17,7 @@ public class Enemy : BaseUnit
     private int[] randomExp = new int[3] { 10, 20, 30 };
 
     [SerializeField]
-    private float originMoveSpeed;
+    protected float originMoveSpeed;
 
     [SerializeField]
     protected SpriteRenderer spriteRenderer;
@@ -26,11 +26,14 @@ public class Enemy : BaseUnit
     private Coroutine burnCoroutine;
     private Coroutine freezeCoroutine;
 
+    protected Color originSpriteColor;
 
     protected override void Awake()
     {
         SetupEnemyData();
         originMoveSpeed = moveSpeed;
+
+        originSpriteColor = spriteRenderer.color;
     }
 
     protected override void OnEnable()
@@ -105,12 +108,9 @@ public class Enemy : BaseUnit
         Debug.Log(unitName + "가(이) 사망!! 경험치 : " + dropExp);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) == true)
-        {
-            TakeDamage(3);
-        }
+        
     }
 
     protected virtual void UpdateHPBar()
@@ -166,7 +166,7 @@ public class Enemy : BaseUnit
         yield return new WaitForSeconds(duration);
 
         moveSpeed = originMoveSpeed;
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = originSpriteColor;
         slowCoroutine = null;
     }
 
@@ -191,7 +191,7 @@ public class Enemy : BaseUnit
 
             yield return new WaitForSeconds(0.5f);
 
-            spriteRenderer.color = Color.white;
+            spriteRenderer.color = originSpriteColor;
 
             yield return new WaitForSeconds(0.5f);
             elapsed++;
@@ -218,7 +218,7 @@ public class Enemy : BaseUnit
         yield return new WaitForSeconds(duration);
 
         moveSpeed = originMoveSpeed;
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = originSpriteColor;
         freezeCoroutine = null;
     }
 }

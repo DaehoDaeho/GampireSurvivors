@@ -127,4 +127,9 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    public float GetAttackRange()
+    {
+        return attackRange;
+    }
 }

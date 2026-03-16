@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7461459586450335094}
   - component: {fileID: 104037170880990363}
   m_Layer: 8
-  m_Name: Projectile
+  m_Name: EnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
   damage: 0
   applyNormalDamage: 1
   useObjectPooling: 1
-  ignoreTarget: Player
-  hitTarget: Enemy
+  ignoreTarget: Enemy
+  hitTarget: Player
 --- !u!58 &104037170880990363
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class PoolManager : MonoBehaviour
     private GameObject damageTextPrefab;
 
     [SerializeField]
+    private GameObject rangedEnemyPrefab;
+
+    [SerializeField]
     private int enemyCount = 50;
 
     [SerializeField]
@@ -29,10 +32,14 @@ public class PoolManager : MonoBehaviour
     [SerializeField]
     private int damageTextCount = 100;
 
+    [SerializeField]
+    private int rangedEnemyCount = 50;
+
     private Queue<GameObject> enemyQueue = new Queue<GameObject>();
     private Queue<GameObject> projectileQueue = new Queue<GameObject>();
     private Queue<GameObject> expGemQueue = new Queue<GameObject>();
     private Queue<GameObject> damageTextQueue = new Queue<GameObject>();
+    private Queue<GameObject> rangedEnemyQueue = new Queue<GameObject>();
 
     private void Awake()
     {
@@ -68,6 +75,14 @@ public class PoolManager : MonoBehaviour
             GameObject go = Instantiate(damageTextPrefab, transform);
             go.SetActive(false);
             damageTextQueue.Enqueue(go); // 큐에 추가.
+        }
+
+        for (int i = 0; i < rangedEnemyCount; ++i)
+        {
+            // 원거리 적 객체를 생성해서 PoolManager 오브젝트의 자식으로 배치.
+            GameObject go = Instantiate(rangedEnemyPrefab, transform);
+            go.SetActive(false);
+            rangedEnemyQueue.Enqueue(go); // 큐에 추가.
         }
     }
 
@@ -155,5 +170,25 @@ public class PoolManager : MonoBehaviour
     {
         damageText.SetActive(false);
         damageTextQueue.Enqueue(damageText);
+    }
+
+    public GameObject GetRangedEnemy()
+    {
+        if (rangedEnemyQueue.Count > 0)
+        {
+            GameObject renagedEnemy = rangedEnemyQueue.Dequeue();
+            renagedEnemy.SetActive(true);
+            return renagedEnemy;
+        }
+
+        GameObject renagedEnemy2 = Instantiate(rangedEnemyPrefab, transform);
+        renagedEnemy2.SetActive(true);
+        return renagedEnemy2;
+    }
+
+    public void ReturnRangedEnemy(GameObject rangedEnemy)
+    {
+        rangedEnemy.SetActive(false);
+        rangedEnemyQueue.Enqueue(rangedEnemy);
     }
 }

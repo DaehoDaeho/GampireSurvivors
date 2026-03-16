@@ -107,6 +107,8 @@ MonoBehaviour:
   damage: 0
   applyNormalDamage: 0
   useObjectPooling: 0
+  ignoreTarget: Player
+  hitTarget: Enemy
 --- !u!58 &104037170880990363
 CircleCollider2D:
   m_ObjectHideFlags: 0

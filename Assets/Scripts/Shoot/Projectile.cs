@@ -29,6 +29,12 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private bool useObjectPooling = true;
 
+    [SerializeField]
+    private string ignoreTarget;
+
+    [SerializeField]
+    private string hitTarget;
+
     private Vector2 moveDirection;
 
     // Update is called once per frame
@@ -66,14 +72,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") == true)
+        if(collision.CompareTag(ignoreTarget) == true)
         {
             return;
         }
 
         if(applyNormalDamage == true)
         {
-            if (collision.CompareTag("Enemy") == true)
+            if (collision.CompareTag(hitTarget) == true)
             {
                 BaseUnit hitUnit = collision.GetComponent<BaseUnit>();
                 if (hitUnit != null)
@@ -86,7 +92,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            if (collision.CompareTag("Enemy") == true)
+            if (collision.CompareTag(hitTarget) == true)
             {
                 if(projectileType == ProjectileType.Normal)
                 {
@@ -122,6 +128,12 @@ public class Projectile : MonoBehaviour
 
     void ApplyStatusEffect(Collider2D collision)
     {
+        BossEnemy boss = collision.GetComponent<BossEnemy>();
+        if(boss != null)
+        {
+            return;
+        }
+
         switch (projectileType)
         {
             case ProjectileType.Slow:
