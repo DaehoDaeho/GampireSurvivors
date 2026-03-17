@@ -42,7 +42,7 @@ public class DamageText : MonoBehaviour
     {
         if(PoolManager.instance != null)
         {
-            PoolManager.instance.ReturnDamageText(gameObject);
+            PoolManager.instance.ReturnObject(PoolID.DamageText, gameObject);
         }
     }
 }

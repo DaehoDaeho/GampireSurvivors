@@ -34,14 +34,19 @@ public class RangedEnemy : Enemy
         shotTimer += Time.deltaTime;
         if(shotTimer >= shotInterval)
         {
-            GameObject go = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            Projectile projectile = go.GetComponent<Projectile>();
-            if(projectile != null)
+            GameObject go = PoolManager.instance.GetObject(PoolID.EnemyProjectile);
+            if(go != null)
             {
-                projectile.Setup(GameManager.Instance.player.transform.position, 4.0f, 10.0f);
-            }
+                go.transform.position = transform.position;
 
-            shotTimer = 0.0f;
+                Projectile projectile = go.GetComponent<Projectile>();
+                if (projectile != null)
+                {
+                    projectile.Setup(GameManager.Instance.player.transform.position, 4.0f, 10.0f);
+                }
+
+                shotTimer = 0.0f;
+            }
         }
     }
 }

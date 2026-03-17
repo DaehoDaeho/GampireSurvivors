@@ -91,7 +91,7 @@ public class ExpGem : MonoBehaviour
                 player.AddExperience(expAmount);
             }
 
-            PoolManager.instance.ReturnExpGem(gameObject);
+            PoolManager.instance.ReturnObject(PoolID.ExpGem, gameObject);
         }
     }
 }

@@ -65,11 +65,11 @@ public class EnemySpawner : MonoBehaviour
                 int number = Random.Range(0, 2);    // 0 또는 1을 무작위로 뽑는다.
                 if (number == 0)
                 {
-                    enemy = PoolManager.instance.GetEnemy();
+                    enemy = PoolManager.instance.GetObject(PoolID.Enemy);
                 }
                 else
                 {
-                    enemy = PoolManager.instance.GetRangedEnemy();
+                    enemy = PoolManager.instance.GetObject(PoolID.RangedEnemy);
                 }                
 
                 // 플레이어의 중심으로부터 15미터 반경 밖의 한 점을 랜덤하게 설정해서 적의 생성위치를 지정.

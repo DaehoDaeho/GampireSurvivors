@@ -35,6 +35,9 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private string hitTarget;
 
+    [SerializeField]
+    private PoolID poolID;
+
     private Vector2 moveDirection;
 
     // Update is called once per frame
@@ -170,9 +173,15 @@ public class Projectile : MonoBehaviour
 
     void ReturnToPool()
     {
-        if(PoolManager.instance != null)
+        if(poolID == PoolID.None)
         {
-            PoolManager.instance.ReturnProjectile(gameObject);
+            Destroy(gameObject);
+            return;
+        }
+
+        if(PoolManager.instance != null)
+        {   
+            PoolManager.instance.ReturnObject(poolID, gameObject);
         }
     }
 

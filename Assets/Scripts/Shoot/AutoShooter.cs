@@ -46,7 +46,7 @@ public class AutoShooter : MonoBehaviour
         if(shootCount == 0 || shootCount % 5 != 0)
         {
             shootCount++;
-            GameObject projectile = PoolManager.instance.GetProjectile();
+            GameObject projectile = PoolManager.instance.GetObject(PoolID.Projectile);
             if (projectile != null)
             {
                 projectile.transform.position = transform.position;

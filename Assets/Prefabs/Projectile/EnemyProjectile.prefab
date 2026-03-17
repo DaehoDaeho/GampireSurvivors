@@ -109,6 +109,7 @@ MonoBehaviour:
   useObjectPooling: 1
   ignoreTarget: Enemy
   hitTarget: Player
+  poolID: 6
 --- !u!58 &104037170880990363
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -58,7 +58,7 @@ public class Enemy : BaseUnit
         base.TakeDamage(damageAmount);
 
         // 데미지 텍스트 출력.
-        GameObject go = PoolManager.instance.GetDamageText();
+        GameObject go = PoolManager.instance.GetObject(PoolID.DamageText);
         if(go != null)
         {
             // 출력 위치 설정.
@@ -69,6 +69,13 @@ public class Enemy : BaseUnit
             {
                 damageText.SetDamage(damageAmount);
             }
+        }
+
+        GameObject go2 = PoolManager.instance.GetObject(PoolID.HitEffect);
+        if(go2 != null)
+        {
+            go2.transform.position = transform.position;
+            go2.transform.localScale = transform.localScale;
         }
 
         UpdateHPBar();
@@ -87,7 +94,7 @@ public class Enemy : BaseUnit
 
         if(PoolManager.instance != null)
         {
-            GameObject expGem = PoolManager.instance.GetExpGem();
+            GameObject expGem = PoolManager.instance.GetObject(PoolID.ExpGem);
             if (expGem != null)
             {
                 expGem.transform.position = transform.position;
@@ -101,7 +108,7 @@ public class Enemy : BaseUnit
                 }
             }
 
-            PoolManager.instance.ReturnEnemy(gameObject);
+            PoolManager.instance.ReturnObject(PoolID.Enemy, gameObject);
         }
 
         // 경험치를 드랍하거나, 플레이어의 경험치를 올려주는 처리를 추후에 한다.
