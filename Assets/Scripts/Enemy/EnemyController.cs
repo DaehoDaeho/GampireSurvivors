@@ -64,6 +64,11 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     void MoveTowardPlayer()
     {
+        if(enemyStat != null && enemyStat.GetMoveSpeed() <= 0.0f)
+        {
+            return;
+        }
+
         // 방향 벡터 계산 (목표 위치 - 내 위치)
         Vector2 direction = targetPlayer.position - transform.position;
 

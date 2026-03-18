@@ -21,10 +21,10 @@ MonoBehaviour:
   - enemyID: 1001
     enemyName: "\uAC11\uC21C\uC774"
     maxHealth: 30
-    moveSpeed: 3
+    moveSpeed: 2
     dropEXP: 10
   - enemyID: 1002
     enemyName: "\uAC11\uCCA0\uC774"
     maxHealth: 100
-    moveSpeed: 4
+    moveSpeed: 2
     dropEXP: 10

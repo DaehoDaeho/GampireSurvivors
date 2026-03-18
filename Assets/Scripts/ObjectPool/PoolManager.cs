@@ -11,7 +11,9 @@ public enum PoolID : int
     DamageText,
     ExpGem,
     EnemyProjectile,
-    HitEffect
+    HitEffect,
+    SuicideEnemy,    // 자폭형 적.
+    ExplosionEffect
 }
 
 [System.Serializable]

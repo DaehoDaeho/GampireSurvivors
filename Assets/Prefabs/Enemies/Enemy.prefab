@@ -189,6 +189,7 @@ MonoBehaviour:
   dropExp: 0
   imageHPBar: {fileID: 2651913759609568277}
   enemyID: 1000
+  enemyType: 2
   randomExp: 0a000000140000001e000000
   originMoveSpeed: 0
   spriteRenderer: {fileID: 2450454905427732777}

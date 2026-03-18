@@ -62,15 +62,11 @@ public class EnemySpawner : MonoBehaviour
                 // 랜덤하게 일반 적/원거리 적을 생성.
                 // 확륙은 1 : 1
                 GameObject enemy = null;
-                int number = Random.Range(0, 2);    // 0 또는 1을 무작위로 뽑는다.
-                if (number == 0)
-                {
-                    enemy = PoolManager.instance.GetObject(PoolID.Enemy);
-                }
-                else
-                {
-                    enemy = PoolManager.instance.GetObject(PoolID.RangedEnemy);
-                }                
+                //PoolID[] pools = { PoolID.Enemy, PoolID.RangedEnemy, PoolID.SuicideEnemy };
+                PoolID[] pools = { PoolID.SuicideEnemy };
+                int number = Random.Range(0, pools.Length);    // 0부터 배열의 길이-1 사이의 숫자를 무작위로 뽑는다.
+
+                enemy = PoolManager.instance.GetObject(pools[number]);
 
                 // 플레이어의 중심으로부터 15미터 반경 밖의 한 점을 랜덤하게 설정해서 적의 생성위치를 지정.
                 Vector2 randomDir = Random.insideUnitCircle.normalized;

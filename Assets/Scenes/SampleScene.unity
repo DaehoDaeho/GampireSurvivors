@@ -3198,6 +3198,12 @@ MonoBehaviour:
   - id: 7
     prefab: {fileID: 4021103657954561961, guid: 2c8b2c1c71435a04e8c525d6cdce4d11, type: 3}
     count: 100
+  - id: 8
+    prefab: {fileID: 6047330645210312502, guid: e182bf2573fe4454ca1c20f63af6d792, type: 3}
+    count: 100
+  - id: 9
+    prefab: {fileID: 2433282508537954060, guid: 694e826c474ac9045b0a151c0675fde2, type: 3}
+    count: 30
 --- !u!4 &1168825925
 Transform:
   m_ObjectHideFlags: 0
@@ -3491,7 +3497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: 
-  maxHealth: 0
+  maxHealth: 500
   currentHealth: 0
   moveSpeed: 0
   isDead: 0

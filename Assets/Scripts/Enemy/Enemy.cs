@@ -14,6 +14,9 @@ public class Enemy : BaseUnit
     private int enemyID;
 
     [SerializeField]
+    private PoolID enemyType;
+
+    [SerializeField]
     private int[] randomExp = new int[3] { 10, 20, 30 };
 
     [SerializeField]
@@ -30,17 +33,15 @@ public class Enemy : BaseUnit
 
     protected override void Awake()
     {
-        SetupEnemyData();
-        originMoveSpeed = moveSpeed;
-
         originSpriteColor = spriteRenderer.color;
     }
 
     protected override void OnEnable()
     {
+        SetupEnemyData();
+
         Init();
 
-        moveSpeed = originMoveSpeed;
         spriteRenderer.color = Color.white;
 
         // 실행중인 모든 코루틴을 중단.
@@ -108,7 +109,7 @@ public class Enemy : BaseUnit
                 }
             }
 
-            PoolManager.instance.ReturnObject(PoolID.Enemy, gameObject);
+            PoolManager.instance.ReturnObject(enemyType, gameObject);
         }
 
         // 경험치를 드랍하거나, 플레이어의 경험치를 올려주는 처리를 추후에 한다.
@@ -149,6 +150,8 @@ public class Enemy : BaseUnit
                 dropExp = enemyData.dropEXP;
             }
         }
+
+        originMoveSpeed = moveSpeed;
     }
 
     public void ApplySlow(float duration, float penaltyPercent)

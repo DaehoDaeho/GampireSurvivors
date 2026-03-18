@@ -15,6 +15,8 @@ public class Player : BaseUnit
     {
         base.Awake();
 
+        Init();
+
         currentLevel = 1;
         maxExp = 100;
         currentExp = 0;
