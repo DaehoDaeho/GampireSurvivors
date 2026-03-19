@@ -119,6 +119,8 @@ public class Projectile : MonoBehaviour
         CancelInvoke("ReturnToPool");
         //StopCoroutine("ReturnToQueue");
 
+        AudioManager.instance.PlaySFX(AudioType.Hit);
+
         if(useObjectPooling == true)
         {
             ReturnToPool();

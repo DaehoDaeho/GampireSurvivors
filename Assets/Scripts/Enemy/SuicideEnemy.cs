@@ -73,6 +73,8 @@ public class SuicideEnemy : Enemy
             obj.transform.position = transform.position;
         }
 
+        AudioManager.instance.PlaySFX(AudioType.Explode);
+
         Die();
     }
 }

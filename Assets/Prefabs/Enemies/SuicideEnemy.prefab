@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2085862164011158356}
   - component: {fileID: 5683574562572493344}
   - component: {fileID: 8665644670246843558}
+  - component: {fileID: 4439890018298084831}
   m_Layer: 7
   m_Name: SuicideEnemy
   m_TagString: Enemy
@@ -186,7 +187,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2450454905427732777}
   attackRange: 1.5
   isAttacking: 0
-  animator: {fileID: 0}
+  animator: {fileID: 4439890018298084831}
 --- !u!50 &2085862164011158356
 Rigidbody2D:
   serializedVersion: 5
@@ -279,6 +280,28 @@ MonoBehaviour:
   explosionDamage: 30
   distRange: 2
   scaleTime: 1.5
+--- !u!95 &4439890018298084831
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047330645210312502}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06b5dee3f157f31458dd8b413a341fb3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8342571798029699011
 GameObject:
   m_ObjectHideFlags: 0

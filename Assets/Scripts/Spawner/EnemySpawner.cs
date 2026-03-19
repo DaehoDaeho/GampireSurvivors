@@ -51,8 +51,8 @@ public class EnemySpawner : MonoBehaviour
         {
             if(bossSpawnedInCurrentWave == false)
             {
-                SpawnBoss();
                 bossSpawnedInCurrentWave = true;
+                SpawnBoss();
             }
         }
         else
@@ -62,8 +62,8 @@ public class EnemySpawner : MonoBehaviour
                 // 랜덤하게 일반 적/원거리 적을 생성.
                 // 확륙은 1 : 1
                 GameObject enemy = null;
-                //PoolID[] pools = { PoolID.Enemy, PoolID.RangedEnemy, PoolID.SuicideEnemy };
-                PoolID[] pools = { PoolID.SuicideEnemy };
+                PoolID[] pools = { PoolID.Enemy, PoolID.RangedEnemy, PoolID.SuicideEnemy };
+                //PoolID[] pools = { PoolID.SuicideEnemy };
                 int number = Random.Range(0, pools.Length);    // 0부터 배열의 길이-1 사이의 숫자를 무작위로 뽑는다.
 
                 enemy = PoolManager.instance.GetObject(pools[number]);
@@ -82,5 +82,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject boss = Instantiate(bossPrefab);
         Vector2 randomDir = Random.insideUnitCircle.normalized;
         boss.transform.position = GameManager.Instance.player.transform.position + (Vector3)(randomDir * 15.0f);
+
+        BossIntroManager.instance.PlayBossIntro(boss.transform.position);
     }
 }
