@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private int gameScore;
+    [SerializeField] private float playLimitTime = 60.0f;
     [SerializeField] private float playTime;
     [SerializeField] private bool isGameOver;
     [SerializeField] private int targetScore;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -48,6 +50,13 @@ public class GameManager : MonoBehaviour
         playTime += Time.deltaTime; // 이전 프레임에서 현재 프레임까지 오는데 걸린 시간.
                                     // 환경이 달라도 동일한 시간을 측정하게 해주는 표준 기능.
                                     // 프레임에 상관없이 일정한 속도로 움직이거나 시간을 처리할 때 사용.
+
+        if(playTime >= playLimitTime)
+        {
+            // 스테이지 클리어 처리.
+            UIManager.Instance.OpenUI(UIType.ClearGame);
+            Time.timeScale = 0.0f;
+        }
     }
 
     public void AddScore(int amount)

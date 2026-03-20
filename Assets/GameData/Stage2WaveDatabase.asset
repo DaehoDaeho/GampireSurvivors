@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8669d4e20bd5d324ca208af54f4742a0, type: 3}
-  m_Name: WaveDatabase
+  m_Name: Stage2WaveDatabase
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1

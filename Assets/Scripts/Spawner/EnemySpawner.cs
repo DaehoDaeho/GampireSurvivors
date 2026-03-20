@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner instance;
+
     [SerializeField]
     private WaveDatabase waveData;
 
@@ -16,14 +18,20 @@ public class EnemySpawner : MonoBehaviour
 
     private bool bossSpawnedInCurrentWave = false;
 
+    private bool canSpawn = false;  // 스폰을 시작해도 되는지 여부.
+
     private void Awake()
     {
-        currentWaveIndex = 0;
-        timer = 0.0f;
+        instance = this;        
     }
 
     private void Update()
     {
+        if(canSpawn == false)
+        {
+            return;
+        }
+
         // 웨이브 넘기기 처리와 몬스터 스폰 처리.
         float gameTime = GameManager.Instance.GetPlayTime();
 
@@ -84,5 +92,14 @@ public class EnemySpawner : MonoBehaviour
         boss.transform.position = GameManager.Instance.player.transform.position + (Vector3)(randomDir * 15.0f);
 
         BossIntroManager.instance.PlayBossIntro(boss.transform.position);
+    }
+
+    public void SetWaveData(WaveDatabase waveDatabase)
+    {
+        waveData = waveDatabase;
+
+        currentWaveIndex = 0;
+        timer = 0.0f;
+        canSpawn = true;
     }
 }
