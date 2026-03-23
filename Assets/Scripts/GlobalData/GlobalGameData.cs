@@ -7,4 +7,5 @@ using UnityEngine;
 public static class GlobalGameData
 {
     public static int currentStageIndex = 1;
+    public static bool needNextStage = false;
 }

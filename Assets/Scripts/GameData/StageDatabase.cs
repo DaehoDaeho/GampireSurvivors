@@ -6,6 +6,7 @@ public class StageData
 {
     public int stageNumber;
     public string stageName;
+    public string stageDesc;
     public WaveDatabase waveDatabase;
 }
 
