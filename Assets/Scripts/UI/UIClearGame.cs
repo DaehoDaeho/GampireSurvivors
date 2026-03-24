@@ -14,7 +14,11 @@ public class UIClearGame : UIBase
     {
         base.OpenUI();
 
-        if(StageManager.instance.IsLastStage(GlobalGameData.currentStageIndex) == true)
+        // 클리어한 스테이지를 저장하고 스테이지 번호를 하나 증가시키고 씬을 다시 로딩.
+        PlayerPrefs.SetInt("ClearStageNumber", GlobalGameData.currentStageIndex);
+        PlayerPrefs.Save();
+
+        if (StageManager.instance.IsLastStage(GlobalGameData.currentStageIndex) == true)
         {
             textMessage.text = "Game Clear!!!";
             buttonNext.SetActive(false);
@@ -23,11 +27,7 @@ public class UIClearGame : UIBase
 
     public void OnClickNextStage()
     {
-        Time.timeScale = 1.0f;
-
-        // 클리어한 스테이지를 저장하고 스테이지 번호를 하나 증가시키고 씬을 다시 로딩.
-        PlayerPrefs.SetInt("ClearStageNumber", GlobalGameData.currentStageIndex);
-        PlayerPrefs.Save();
+        Time.timeScale = 1.0f;        
 
         GlobalGameData.currentStageIndex++;
         //GlobalGameData.needNextStage = true;
