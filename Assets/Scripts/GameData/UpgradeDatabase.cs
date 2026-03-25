@@ -5,7 +5,8 @@ public enum UpgradeType
 {
     PlayerMoveSpeed = 0,
     ProjectileDamage = 1,
-    ProjectileMoveSpeed = 2
+    ProjectileMoveSpeed = 2,
+    ProjectileCount = 3
 }
 
 [System.Serializable]

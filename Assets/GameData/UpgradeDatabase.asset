@@ -25,3 +25,7 @@ MonoBehaviour:
     thumbnail: {fileID: -5432176002854289831, guid: 137f734b9416a6c49870934104b1c292, type: 3}
     description: "\uCD1D\uC54C\uC758 \uC18D\uB3C4\uB97C 2 \uC62C\uB824\uC900\uB2E4."
     upgradeValue: 2
+  - upgradeType: 3
+    thumbnail: {fileID: 355559869370167616, guid: d86124f2e4b60f943adcf49790e1c9c9, type: 3}
+    description: "\uCD1D\uC54C\uC758 \uAC1C\uC218\uB97C \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
+    upgradeValue: 1

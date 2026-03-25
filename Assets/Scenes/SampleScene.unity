@@ -2803,7 +2803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScore: 0
-  playLimitTime: 60
+  playLimitTime: 180
   playTime: 0
   isGameOver: 0
   targetScore: 0
@@ -4075,6 +4075,9 @@ MonoBehaviour:
   attackRange: 8
   upgradeDamage: 0
   upgradeMoveSpeed: 0
+  projectileCount: 1
+  spreadAngle: 10
+  aimDistance: 10
 --- !u!70 &1200021475
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

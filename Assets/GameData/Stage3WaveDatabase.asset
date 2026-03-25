@@ -18,14 +18,14 @@ MonoBehaviour:
     spawnInterval: 2
     isBossWave: 0
   - waveName: Wave2
-    startTime: 10
+    startTime: 30
     spawnInterval: 1
     isBossWave: 0
   - waveName: Wave 3
-    startTime: 20
+    startTime: 60
     spawnInterval: 0.5
     isBossWave: 0
   - waveName: Wave 4
-    startTime: 30
+    startTime: 90
     spawnInterval: 0.5
     isBossWave: 1

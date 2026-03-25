@@ -63,6 +63,12 @@ public class UIUpgrade : UIBase
                     GameManager.Instance.autoShooter.SetUpgradeMoveSpeed(upgradeDatas[index].upgradeValue);
                 }
                 break;
+
+            case UpgradeType.ProjectileCount:
+                {
+                    GameManager.Instance.autoShooter.AddProjectileCount((int)upgradeDatas[index].upgradeValue);
+                }
+                break;
         }
 
         UIManager.Instance.CloseUI(UIType.Upgrade);
