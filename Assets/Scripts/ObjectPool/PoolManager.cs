@@ -29,7 +29,7 @@ public class PoolManager : MonoBehaviour
     public static PoolManager instance;
 
     [SerializeField]
-    private List<PoolInfo> poolInfos;
+    private List<PoolInfo> poolInfos = new List<PoolInfo>();
 
     private Dictionary<PoolID, Queue<GameObject>> poolDictionary = new Dictionary<PoolID, Queue<GameObject>>();
 

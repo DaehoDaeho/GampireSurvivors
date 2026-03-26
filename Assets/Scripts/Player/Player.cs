@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : BaseUnit
@@ -10,6 +11,34 @@ public class Player : BaseUnit
 
     [SerializeField]
     private int currentExp;
+
+    [Header("대쉬 설정")]
+    [SerializeField]
+    float dashSpeed = 15.0f;
+
+    [SerializeField]
+    float dashDuration = 0.3f;
+
+    [SerializeField]
+    float dashCooldown = 1.0f;
+
+    [SerializeField]
+    float dashDamage = 30.0f;
+
+    [SerializeField]
+    float dashDamageRadius = 1.5f;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private GameObject playerGhostPrefab;
+
+    [SerializeField]
+    private float ghostCooldown = 0.05f;
+
+    private bool isDashing = false;
+    private float dashCooldownTimer = 0.0f;
 
     protected override void Awake()
     {
@@ -29,8 +58,94 @@ public class Player : BaseUnit
         UIManager.Instance.UpdateLevel(currentLevel);
     }
 
+    void Update()
+    {
+        if(isDashing == true)
+        {
+            return;
+        }
+
+        dashCooldownTimer += Time.deltaTime;
+
+        if(Input.GetKeyDown(KeyCode.Space) == true && dashCooldownTimer >= dashCooldown)
+        {
+            StartCoroutine(DashRoutine());
+        }
+    }
+
+    IEnumerator DashRoutine()
+    {
+        isDashing = true;
+        dashCooldownTimer = 0.0f;
+
+        float movex = Input.GetAxisRaw("Horizontal");
+        float movey = Input.GetAxisRaw("Vertical");
+
+        Vector2 dashDir = new Vector2(movex, movey).normalized;
+
+        float timer = 0.0f;
+        float trailTimer = 0.0f;
+
+        while(timer < dashDuration)
+        {
+            timer += Time.deltaTime;
+
+            transform.Translate(dashDir * dashSpeed * Time.deltaTime);
+
+            // 데미지 처리.
+            ApplyDashDamage();
+
+            // 잔상 생성.
+            trailTimer += Time.deltaTime;
+            if(trailTimer >= ghostCooldown)
+            {
+                CreateTrail();
+                trailTimer = 0.0f;
+            }
+
+            yield return null;
+        }
+
+        isDashing = false;
+    }
+
+    void ApplyDashDamage()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, dashDamageRadius);
+        foreach(Collider2D hit in hits)
+        {
+            if(hit.CompareTag("Enemy") == true)
+            {
+                Enemy enemy = hit.GetComponent<Enemy>();
+                if(enemy != null)
+                {
+                    enemy.TakeDamage(dashDamage);
+                }
+            }
+        }
+    }
+
+    void CreateTrail()
+    {
+        GameObject obj = Instantiate(playerGhostPrefab);
+        if(obj != null)
+        {
+            GhostTrail ghostTrail = obj.GetComponent<GhostTrail>();
+            if(ghostTrail != null)
+            {
+                ghostTrail.Init(spriteRenderer.sprite, transform.position, transform.rotation,
+                    transform.localScale, spriteRenderer.flipX);
+            }
+        }
+    }
+
     public override void TakeDamage(float damageAmount)
     {
+        if(isDashing == true)
+        {
+            return;
+        }
+
         base.TakeDamage(damageAmount);
 
         // 이미 죽은 상태라면 추가 효과를 처리하지 않도록 한다.
@@ -78,5 +193,10 @@ public class Player : BaseUnit
         UIManager.Instance.UpdateLevel(currentLevel);
 
         UIManager.Instance.OpenUI(UIType.Upgrade);
+    }
+
+    public void AddDashDamage(float damage)
+    {
+        dashDamage += damage;
     }
 }

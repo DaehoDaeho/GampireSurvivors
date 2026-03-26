@@ -2809,6 +2809,7 @@ MonoBehaviour:
   targetScore: 0
   enemyDatabase: {fileID: 11400000, guid: ea7925916a9edbb4cb4c342c02f70857, type: 2}
   projectileDatabase: {fileID: 11400000, guid: 766e87b240261984985def4fda02f2a9, type: 2}
+  playerObj: {fileID: 1200021473}
   player: {fileID: 1200021467}
   autoShooter: {fileID: 1200021474}
   upgradeInfo: {fileID: 806718920}
@@ -4054,6 +4055,14 @@ MonoBehaviour:
   currentLevel: 0
   maxExp: 0
   currentExp: 0
+  dashSpeed: 15
+  dashDuration: 0.3
+  dashCooldown: 1
+  dashDamage: 30
+  dashDamageRadius: 1.5
+  spriteRenderer: {fileID: 1200021469}
+  playerGhostPrefab: {fileID: 8130781371710203375, guid: 2b93b5429fe319346a81149af0e8af61, type: 3}
+  ghostCooldown: 0.05
 --- !u!114 &1200021474
 MonoBehaviour:
   m_ObjectHideFlags: 0

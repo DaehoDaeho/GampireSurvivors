@@ -23,6 +23,7 @@ public class Effect : MonoBehaviour
 
     void ReturnObject()
     {
+        Debug.Log(poolID);
         PoolManager.instance.ReturnObject(poolID, gameObject);
     }
 }

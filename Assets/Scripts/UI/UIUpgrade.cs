@@ -69,6 +69,12 @@ public class UIUpgrade : UIBase
                     GameManager.Instance.autoShooter.AddProjectileCount((int)upgradeDatas[index].upgradeValue);
                 }
                 break;
+
+            case UpgradeType.DashDamage:
+                {
+                    GameManager.Instance.playerObj.AddDashDamage(upgradeDatas[index].upgradeValue);
+                }
+                break;
         }
 
         UIManager.Instance.CloseUI(UIType.Upgrade);
