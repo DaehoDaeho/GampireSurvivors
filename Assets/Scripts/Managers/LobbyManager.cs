@@ -7,6 +7,9 @@ public class LobbyManager : MonoBehaviour
     [SerializeField]
     private StageScrollview stageScrollview;
 
+    [SerializeField]
+    private UIShop uiShop;
+
     private void Awake()
     {
         instance = this;
@@ -16,18 +19,19 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         stageScrollview.SetSelectStagePanelVisible(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        uiShop.SetShopVisible(false);
     }
 
     public void OnClickBattle()
     {
         stageScrollview.SetSelectStagePanelVisible(true);
         stageScrollview.SetSelectStagePanelData();
+    }
+
+    public void OnClickShop()
+    {
+        uiShop.SetShopVisible(true);
+        uiShop.SetShopData();
     }
 
     public void OnClickExit()
