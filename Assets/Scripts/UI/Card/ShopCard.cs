@@ -31,4 +31,9 @@ public class ShopCard : MonoBehaviour
         imageThumbnail.sprite = weaponData.thumbnail;
         textPrice.text = price.ToString();
     }
+
+    public void OnClickBuy()
+    {
+        LobbyManager.instance.SetSelectedShopData(shopData, data);
+    }
 }

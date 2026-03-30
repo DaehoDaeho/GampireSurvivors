@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class UIShop : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class UIShop : MonoBehaviour
     [SerializeField]
     private WeaponDatabase weaponDatabase;
 
+    [SerializeField]
+    private TMP_Text textGold;
+
     private List<ShopCard> cardList = new List<ShopCard>();
     
     public void SetShopVisible(bool visible)
@@ -35,5 +39,10 @@ public class UIShop : MonoBehaviour
             shopCard.SetData(weaponData, data);
             cardList.Add(shopCard);
         }
+    }
+
+    public void UpdateGoldText()
+    {
+        textGold.text = DataManager.GetGold().ToString();
     }
 }

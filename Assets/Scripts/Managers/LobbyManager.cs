@@ -10,9 +10,20 @@ public class LobbyManager : MonoBehaviour
     [SerializeField]
     private UIShop uiShop;
 
+    [SerializeField]
+    private UIBuyPopup uiBuyPopup;
+
+    [SerializeField]
+    private UIMessagePopup uiMessagePopup;
+
+    private ItemShopData selectedShopData;
+    private WeaponData selectedWeaponData;
+
     private void Awake()
     {
         instance = this;
+
+        DataManager.Load();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +43,7 @@ public class LobbyManager : MonoBehaviour
     {
         uiShop.SetShopVisible(true);
         uiShop.SetShopData();
+        uiShop.UpdateGoldText();
     }
 
     public void OnClickExit()
@@ -44,5 +56,34 @@ public class LobbyManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void SetSelectedShopData(ItemShopData shopData, WeaponData weaponData)
+    {
+        selectedShopData = shopData;
+        selectedWeaponData = weaponData;
+
+        uiBuyPopup.SetBuyPopupVisible(true);
+        uiBuyPopup.SetBuyMessage(selectedWeaponData, shopData.price);
+    }
+
+    public void OpenMessagePopup()
+    {
+        uiMessagePopup.SetMessagePopup(true);
+    }
+
+    public void SetMessage(string message)
+    {
+        uiMessagePopup.SetMessage(message);
+    }
+
+    public void ProcessBuyItem()
+    {
+        MyItemInfo info = new MyItemInfo();
+        info.id = selectedWeaponData.id;
+        info.invenIndex = DataManager.currentData.items.Count;
+        DataManager.AddItem(info);
+        DataManager.currentData.gold -= selectedShopData.price;
+        DataManager.SetGold(DataManager.currentData.gold);
     }
 }
