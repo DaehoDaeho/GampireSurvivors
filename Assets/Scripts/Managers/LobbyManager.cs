@@ -11,6 +11,9 @@ public class LobbyManager : MonoBehaviour
     private UIShop uiShop;
 
     [SerializeField]
+    private UIInventory uiInventory;
+
+    [SerializeField]
     private UIBuyPopup uiBuyPopup;
 
     [SerializeField]
@@ -83,7 +86,13 @@ public class LobbyManager : MonoBehaviour
         info.id = selectedWeaponData.id;
         info.invenIndex = DataManager.currentData.items.Count;
         DataManager.AddItem(info);
-        DataManager.currentData.gold -= selectedShopData.price;
-        DataManager.SetGold(DataManager.currentData.gold);
+        DataManager.SubtractGold(selectedShopData.price);
+        uiShop.UpdateGoldText();
+    }
+
+    public void OnClickInventory()
+    {
+        uiInventory.SetInventoryVisible(true);
+        uiInventory.SetInventoryData();
     }
 }

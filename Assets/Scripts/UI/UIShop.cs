@@ -31,6 +31,12 @@ public class UIShop : MonoBehaviour
 
     public void SetShopData()
     {
+        foreach(ShopCard card in cardList)
+        {
+            Destroy(card.gameObject);
+        }
+        cardList.Clear();
+
         foreach(ItemShopData data in itemShopDatabase.items)
         {
             GameObject go = Instantiate(shopCardPrefab, content);
@@ -44,5 +50,10 @@ public class UIShop : MonoBehaviour
     public void UpdateGoldText()
     {
         textGold.text = DataManager.GetGold().ToString();
+    }
+
+    public void OnClickExit()
+    {
+        SetShopVisible(false);
     }
 }
