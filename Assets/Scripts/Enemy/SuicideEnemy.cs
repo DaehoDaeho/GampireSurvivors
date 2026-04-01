@@ -29,6 +29,12 @@ public class SuicideEnemy : Enemy
         }
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        StopAllCoroutines();
+    }
+
     IEnumerator Explode()
     {
         isExploding = true;

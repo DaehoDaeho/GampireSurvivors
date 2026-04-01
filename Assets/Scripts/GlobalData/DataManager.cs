@@ -111,7 +111,14 @@ public static class DataManager
 
     public static void ChangeEquippedWeapon(MyItemInfo info)
     {
-        currentData.equippedWeapon = info;
+        currentData.equippedWeapon.id = info.id;
+        currentData.equippedWeapon.invenIndex = info.invenIndex;
         Save();
     }
+
+    public static MyItemInfo GetEquippedWeaponInfo()
+    {
+        return currentData.equippedWeapon;
+    }
+
 }

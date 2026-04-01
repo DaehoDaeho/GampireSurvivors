@@ -100,7 +100,8 @@ public class AutoShooter : MonoBehaviour
             Projectile proj = projectile.GetComponent<Projectile>();
             if (proj != null)
             {
-                ProjectileData projectileData = GameManager.Instance.GetProjectileData(proj.GetID());
+                WeaponData projectileData = GameManager.Instance.GetWeaponData(DataManager.GetEquippedWeaponInfo().id);
+                proj.SetProjectileData(projectileData.id, projectileData.type);
                 float damage = projectileData.damage + upgradeDamage;
                 float moveSpeed = projectileData.moveSpeed + upgradeMoveSpeed;
                 proj.Setup(targetPosition, moveSpeed, damage);
@@ -119,7 +120,7 @@ public class AutoShooter : MonoBehaviour
         Projectile proj = projectile.GetComponent<Projectile>();
         if (proj != null)
         {
-            ProjectileData projectileData = GameManager.Instance.GetProjectileData(proj.GetID());
+            WeaponData projectileData = GameManager.Instance.GetWeaponData(proj.GetID());
             float damage = projectileData.damage + upgradeDamage;
             float moveSpeed = projectileData.moveSpeed + upgradeMoveSpeed;
             proj.Setup(targetPosition, moveSpeed, damage);
@@ -155,15 +156,15 @@ public class AutoShooter : MonoBehaviour
         bool useNormalProjectile = true;
 
         //GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        if(shootCount == 0 || shootCount % 5 != 0)
-        {
-            shootCount++;            
-        }
-        else
-        {
-            shootCount++;
-            useNormalProjectile = false;
-        }
+        //if(shootCount == 0 || shootCount % 5 != 0)
+        //{
+        //    shootCount++;            
+        //}
+        //else
+        //{
+        //    shootCount++;
+        //    useNormalProjectile = false;
+        //}
 
         FireSpreadProjectiles(target, useNormalProjectile);
     }

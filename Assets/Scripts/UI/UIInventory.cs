@@ -13,19 +13,30 @@ public class UIInventory : MonoBehaviour
     private GameObject invenPanel;
 
     [SerializeField]
+    private GameObject equipButton;
+
+    [SerializeField]
     private WeaponDatabase weaponDatabase;
 
     private List<InventoryCard> cards = new List<InventoryCard>();
+
+    private MyItemInfo selectedItemInfo = new MyItemInfo();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SetInventoryVisible(false);
+        SetEquipButtonVisible(false);
     }
 
     public void SetInventoryVisible(bool visible)
     {
         invenPanel.SetActive(visible);
+    }
+
+    public void SetEquipButtonVisible(bool visible)
+    {
+        equipButton.SetActive(visible);
     }
 
     public void SetInventoryData()
@@ -53,8 +64,34 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    public void SetSelectedInvenItemInfo(int id, int index)
+    {
+        selectedItemInfo.id = id;
+        selectedItemInfo.invenIndex = index;
+    }
+
+    public MyItemInfo GetSelectedItemInfo()
+    {
+        return selectedItemInfo;
+    }
+
     public void OnClickExit()
     {
         SetInventoryVisible(false);
+        SetEquipButtonVisible(false);
+    }
+
+    public void OnClickEquip()
+    {
+        DataManager.ChangeEquippedWeapon(selectedItemInfo);
+        RefreshEquipState();
+    }
+
+    void RefreshEquipState()
+    {
+        foreach(InventoryCard card in cards)
+        {
+            card.RefreshEquipState();
+        }
     }
 }

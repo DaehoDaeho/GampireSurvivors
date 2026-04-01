@@ -18,12 +18,14 @@ MonoBehaviour:
     desc: "\uAE30\uBCF8 \uB370\uBBF8\uC9C0\uB9CC \uC8FC\uB294 \uCD1D\uC774\uB2E4."
     thumbnail: {fileID: 0}
     damage: 10
+    moveSpeed: 10
     type: 0
   - id: 1001
     name: Slow Gun
     desc: "\uB9DE\uC740 \uB300\uC0C1\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C \uB2A6\uCD98\uB2E4."
     thumbnail: {fileID: 0}
     damage: 10
+    moveSpeed: 10
     type: 1
   - id: 1002
     name: Fire Gun
@@ -31,10 +33,12 @@ MonoBehaviour:
       \uC900\uB2E4."
     thumbnail: {fileID: 0}
     damage: 10
+    moveSpeed: 10
     type: 2
   - id: 1003
     name: Freeze Gun
     desc: "\uC801\uC744 \uC7A0\uAE50\uB3D9\uC548 \uBA48\uCD94\uAC8C \uD55C\uB2E4."
     thumbnail: {fileID: 0}
     damage: 10
+    moveSpeed: 10
     type: 3

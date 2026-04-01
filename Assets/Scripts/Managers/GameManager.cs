@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isGameOver;
     [SerializeField] private int targetScore;
     [SerializeField] private EnemyDatabase enemyDatabase;
-    [SerializeField] private ProjectileDatabase projectileDatabase;    
+    [SerializeField] private WeaponDatabase projectileDatabase;    
 
     public static GameManager Instance;
 
@@ -89,11 +89,11 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    public ProjectileData GetProjectileData(int targetID)
+    public WeaponData GetWeaponData(int targetID)
     {
         if (projectileDatabase != null)
         {
-            return projectileDatabase.GetProjectileData(targetID);
+            return projectileDatabase.GetWeaponData(targetID);
         }
 
         return null;

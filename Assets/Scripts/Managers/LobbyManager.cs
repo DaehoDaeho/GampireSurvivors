@@ -95,4 +95,10 @@ public class LobbyManager : MonoBehaviour
         uiInventory.SetInventoryVisible(true);
         uiInventory.SetInventoryData();
     }
+
+    public void SetSelectedInvenItemInfo(int id, int index)
+    {
+        uiInventory.SetSelectedInvenItemInfo(id, index);
+        uiInventory.SetEquipButtonVisible(true);
+    }
 }

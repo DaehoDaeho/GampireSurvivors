@@ -122,7 +122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 390618257525344085}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5571754977778389685}
+        m_TargetAssemblyTypeName: InventoryCard, Assembly-CSharp
+        m_MethodName: OnClickCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5571754977778389685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textName: {fileID: 5659903691561759893}
+  equipText: {fileID: 6601327228823734657}
 --- !u!1 &3241924948144764277
 GameObject:
   m_ObjectHideFlags: 0

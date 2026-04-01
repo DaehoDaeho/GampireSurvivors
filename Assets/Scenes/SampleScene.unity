@@ -2808,7 +2808,7 @@ MonoBehaviour:
   isGameOver: 0
   targetScore: 0
   enemyDatabase: {fileID: 11400000, guid: ea7925916a9edbb4cb4c342c02f70857, type: 2}
-  projectileDatabase: {fileID: 11400000, guid: 766e87b240261984985def4fda02f2a9, type: 2}
+  projectileDatabase: {fileID: 11400000, guid: f274875502e1cb944b11cf79bab842a5, type: 2}
   playerObj: {fileID: 1200021473}
   player: {fileID: 1200021467}
   autoShooter: {fileID: 1200021474}

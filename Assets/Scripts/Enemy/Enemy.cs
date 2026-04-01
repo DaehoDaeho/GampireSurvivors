@@ -54,6 +54,25 @@ public class Enemy : BaseUnit
         UpdateHPBar();
     }
 
+    protected virtual void OnDisable()
+    {
+        StopAllCoroutines();
+        if(slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+
+        if(burnCoroutine != null)
+        {
+            StopCoroutine(burnCoroutine);
+        }
+
+        if(freezeCoroutine != null)
+        {
+            StopCoroutine(freezeCoroutine);
+        }
+    }
+
     public override void TakeDamage(float damageAmount)
     {
         base.TakeDamage(damageAmount);
@@ -162,7 +181,10 @@ public class Enemy : BaseUnit
             StopCoroutine(slowCoroutine);
         }
 
-        slowCoroutine = StartCoroutine(SlowRoutine(duration, penaltyPercent));
+        if(gameObject.activeSelf == true)
+        {
+            slowCoroutine = StartCoroutine(SlowRoutine(duration, penaltyPercent));
+        }
     }
 
     IEnumerator SlowRoutine(float duration, float penaltyPercent)
@@ -187,7 +209,10 @@ public class Enemy : BaseUnit
             StopCoroutine(burnCoroutine);
         }
 
-        burnCoroutine = StartCoroutine(BurnRoutine(duration, damagePerSecond));
+        if (gameObject.activeSelf == true)
+        {
+            burnCoroutine = StartCoroutine(BurnRoutine(duration, damagePerSecond));
+        }   
     }
 
     IEnumerator BurnRoutine(float duration, float damagePerSecond)
@@ -217,7 +242,10 @@ public class Enemy : BaseUnit
             StopCoroutine(freezeCoroutine);
         }
 
-        freezeCoroutine = StartCoroutine(FreezeRoutine(duration));
+        if (gameObject.activeSelf == true)
+        {
+            freezeCoroutine = StartCoroutine(FreezeRoutine(duration));
+        }
     }
 
     IEnumerator FreezeRoutine(float duration)

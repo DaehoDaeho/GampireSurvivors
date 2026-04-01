@@ -9,6 +9,7 @@ public class WeaponData
     public string desc;
     public Sprite thumbnail;
     public float damage;
+    public float moveSpeed;
     public ProjectileType type;
 }
 

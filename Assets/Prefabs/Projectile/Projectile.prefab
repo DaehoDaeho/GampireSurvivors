@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectildID: 1000
+  sr: {fileID: 4664161578290969472}
   projectileType: 0
   moveSpeed: 0
   damage: 0

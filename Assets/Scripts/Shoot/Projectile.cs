@@ -15,6 +15,9 @@ public class Projectile : MonoBehaviour
     private int projectildID;
 
     [SerializeField]
+    private SpriteRenderer sr;
+
+    [SerializeField]
     private ProjectileType projectileType;
 
     [SerializeField]
@@ -50,6 +53,53 @@ public class Projectile : MonoBehaviour
     public int GetID()
     {
         return projectildID;
+    }
+
+    public void SetProjectileData(int id, ProjectileType type)
+    {
+        SetID(id);
+        SetProjectileType(type);
+        SetColor();
+    }
+
+    public void SetID(int id)
+    {
+        projectildID = id;
+    }
+
+    public void SetProjectileType(ProjectileType type)
+    {
+        projectileType = type;
+    }
+
+    void SetColor()
+    {
+        switch(projectileType)
+        {
+            case ProjectileType.Normal:
+                {
+                    sr.color = Color.white;
+                }
+                break;
+
+            case ProjectileType.Slow:
+                {
+                    sr.color = Color.gray;
+                }
+                break;
+
+            case ProjectileType.Burn:
+                {
+                    sr.color = Color.red;
+                }
+                break;
+
+            case ProjectileType.Freeze:
+                {
+                    sr.color = Color.cyan;
+                }
+                break;
+        }
     }
 
     public void Setup(Vector3 targetPosition, float speed, float damage)
