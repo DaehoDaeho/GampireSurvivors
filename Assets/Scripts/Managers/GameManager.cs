@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isGameOver;
     [SerializeField] private int targetScore;
     [SerializeField] private EnemyDatabase enemyDatabase;
-    [SerializeField] private WeaponDatabase projectileDatabase;    
+    [SerializeField] private WeaponDatabase projectileDatabase;
+    [SerializeField] private StageDatabase stageDatabase;
 
     public static GameManager Instance;
 
@@ -110,5 +111,10 @@ public class GameManager : MonoBehaviour
     public float GetPlayTime()
     {
         return playTime;
+    }
+
+    public StageData GetStageData(int id)
+    {
+        return stageDatabase.GetStageData(id);
     }
 }

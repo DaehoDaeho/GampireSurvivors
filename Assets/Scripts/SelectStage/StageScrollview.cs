@@ -68,7 +68,8 @@ public class StageScrollview : MonoBehaviour
             return;
         }
 
-        int clearStageNum = PlayerPrefs.GetInt("ClearStageNumber", 0);
+        //int clearStageNum = PlayerPrefs.GetInt("ClearStageNumber", 0);
+        int clearStageNum = DataManager.GetClearedStage();
 
         if (SelectedStageData.stageNumber <= clearStageNum || SelectedStageData.stageNumber == clearStageNum + 1)
         {
@@ -93,7 +94,8 @@ public class StageScrollview : MonoBehaviour
 
     public void SetSelectStagePanelData()
     {
-        int clearStageNum = PlayerPrefs.GetInt("ClearStageNumber", 0);
+        //int clearStageNum = PlayerPrefs.GetInt("ClearStageNumber", 0);
+        int clearStageNum = DataManager.GetClearedStage();
 
         for (int i = 0; i < stageDatabase.stages.Count; ++i)
         {

@@ -16,12 +16,21 @@ MonoBehaviour:
   - stageNumber: 1
     stageName: "1\uBC88 \uC2A4\uD14C\uC774\uC9C0"
     stageDesc: "\uCCAB\uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC785\uB2C8\uB2E4."
+    reward:
+      type: 0
+      value: 500
     waveDatabase: {fileID: 11400000, guid: 31c5e502111f7d14cabf346d0973abac, type: 2}
   - stageNumber: 2
     stageName: "2\uBC88 \uC2A4\uD14C\uC774\uC9C0"
     stageDesc: "\uB450\uBC88\uC9F8 \uC2A4\uD14C\uC774\uC9C0\uC785\uB2C8\uB2E4."
+    reward:
+      type: 1
+      value: 1001
     waveDatabase: {fileID: 11400000, guid: f35466969016ff2498062bad9a633edc, type: 2}
   - stageNumber: 3
     stageName: "3\uBC88 \uC2A4\uD14C\uC774\uC9C0"
     stageDesc: "\uB9C8\uC9C0\uB9C9 \uC2A4\uD14C\uC774\uC9C0\uC785\uB2C8\uB2E4."
+    reward:
+      type: 0
+      value: 600
     waveDatabase: {fileID: 11400000, guid: c3744f5265f790c4f85a1c0815cf82e7, type: 2}

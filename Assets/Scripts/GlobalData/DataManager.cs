@@ -121,4 +121,8 @@ public static class DataManager
         return currentData.equippedWeapon;
     }
 
+    public static int GetItemCount()
+    {
+        return currentData.items.Count;
+    }
 }
