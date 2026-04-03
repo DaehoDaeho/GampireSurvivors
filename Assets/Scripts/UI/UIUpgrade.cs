@@ -75,6 +75,12 @@ public class UIUpgrade : UIBase
                     GameManager.Instance.playerObj.AddDashDamage(upgradeDatas[index].upgradeValue);
                 }
                 break;
+
+            case UpgradeType.BladeCount:
+                {
+                    GameManager.Instance.bladeOrbitManager.AddBladeCount((int)upgradeDatas[index].upgradeValue);
+                }
+                break;
         }
 
         UIManager.Instance.CloseUI(UIType.Upgrade);

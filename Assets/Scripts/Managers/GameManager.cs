@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Player playerObj;
     public PlayerController player;
     public AutoShooter autoShooter;
+    public BladeOrbitManager bladeOrbitManager;
 
     [SerializeField] private UpgradeInfo upgradeInfo;
 
