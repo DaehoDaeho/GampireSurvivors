@@ -2,8 +2,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum EnemyType
+{
+    Melee = 0,
+    Ranged = 1,
+    Suicide = 2,
+    Boss = 3
+}
+
 public class Enemy : BaseUnit
 {
+    [SerializeField]
+    private EnemyType type = EnemyType.Melee;
+
     [SerializeField]
     private int dropExp;
 
@@ -24,6 +35,17 @@ public class Enemy : BaseUnit
 
     [SerializeField]
     protected SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    protected EnemyController enemyController;
+
+    [SerializeField]
+    protected float attackInterval;
+
+    [SerializeField]
+    private float damageAmount = 5.0f;
+
+    protected float attackTimer = 0.0f;
 
     private Coroutine slowCoroutine;
     private Coroutine burnCoroutine;
@@ -137,7 +159,27 @@ public class Enemy : BaseUnit
 
     protected virtual void Update()
     {
-        
+        if(type != EnemyType.Melee)
+        {
+            return;
+        }
+
+        Attack();
+    }
+
+    void Attack()
+    {
+        attackTimer += Time.deltaTime;
+        if(attackTimer >= attackInterval)
+        {
+            float distance = Vector2.Distance(transform.position, GameManager.Instance.player.transform.position);
+            if (distance <= enemyController.GetAttackRange())
+            {
+                GameManager.Instance.playerObj.TakeDamage(damageAmount);
+            }
+            
+            attackTimer = 0.0f;
+        }
     }
 
     protected virtual void UpdateHPBar()

@@ -4,15 +4,7 @@ public class RangedEnemy : Enemy
 {
     [SerializeField]
     private GameObject projectilePrefab;
-
-    [SerializeField]
-    private float shotInterval = 2.5f;
-
-    [SerializeField]
-    private EnemyController enemyController;
-
-    private float shotTimer;
-
+    
     protected override void Update()
     {
         if(isDead == true)
@@ -31,8 +23,8 @@ public class RangedEnemy : Enemy
 
     void Shoot()
     {
-        shotTimer += Time.deltaTime;
-        if(shotTimer >= shotInterval)
+        attackTimer += Time.deltaTime;
+        if(attackTimer >= attackInterval)
         {
             GameObject go = PoolManager.instance.GetObject(PoolID.EnemyProjectile);
             if(go != null)
@@ -45,7 +37,7 @@ public class RangedEnemy : Enemy
                     projectile.Setup(GameManager.Instance.player.transform.position, 4.0f, 10.0f);
                 }
 
-                shotTimer = 0.0f;
+                attackTimer = 0.0f;
             }
         }
     }

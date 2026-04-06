@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIGameOver : UIBase
 {
@@ -9,6 +10,8 @@ public class UIGameOver : UIBase
     public override void OpenUI()
     {
         base.OpenUI();
+
+        Time.timeScale = 0.0f;
 
         if(textMessage != null)
         {
@@ -25,5 +28,19 @@ public class UIGameOver : UIBase
             // 빈 문자열로 채운다.
             textMessage.text = string.Empty;
         }
+    }
+
+    public void OnClickRestart()
+    {
+        Time.timeScale = 1.0f;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnClickGotoLobby()
+    {
+        Time.timeScale = 1.0f;
+
+        SceneManager.LoadScene("LobbyScene");
     }
 }

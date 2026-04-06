@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     private UIBase[] uis;
 
     [SerializeField]
+    private Image imageHpBar;
+
+    [SerializeField]
     private Image imageExpBar;
 
     [SerializeField]
@@ -47,6 +50,11 @@ public class UIManager : MonoBehaviour
             currentOpenedUI.CloseUI();
             currentOpenedUI = null;
         }
+    }
+
+    public void UpdateHpBar(float percent)
+    {
+        imageHpBar.fillAmount = percent;
     }
 
     public void UpdateExpBar(float percent)

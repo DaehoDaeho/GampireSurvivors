@@ -245,7 +245,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -269,6 +269,7 @@ MonoBehaviour:
   currentHealth: 0
   moveSpeed: 0
   isDead: 0
+  type: 2
   dropExp: 0
   imageHPBar: {fileID: 2651913759609568277}
   enemyID: 1002
@@ -276,6 +277,9 @@ MonoBehaviour:
   randomExp: 0a000000140000001e000000
   originMoveSpeed: 0
   spriteRenderer: {fileID: 2450454905427732777}
+  enemyController: {fileID: 0}
+  attackInterval: 0
+  damageAmount: 5
   explosionRadius: 3.5
   explosionDamage: 30
   distRange: 2

@@ -118,4 +118,10 @@ public class GameManager : MonoBehaviour
     {
         return stageDatabase.GetStageData(id);
     }
+
+    public void ProcessGameOver()
+    {
+        UIManager.Instance.OpenUI(UIType.GameOver);
+        isGameOver = true;
+    }
 }

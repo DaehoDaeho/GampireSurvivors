@@ -56,6 +56,7 @@ public class Player : BaseUnit
     {
         UIManager.Instance.UpdateExpBar(0.0f);
         UIManager.Instance.UpdateLevel(currentLevel);
+        UpdateHpUI();
     }
 
     void Update()
@@ -148,6 +149,8 @@ public class Player : BaseUnit
 
         base.TakeDamage(damageAmount);
 
+        UpdateHpUI();
+
         // 이미 죽은 상태라면 추가 효과를 처리하지 않도록 한다.
         if(isDead == true)
         {
@@ -164,6 +167,7 @@ public class Player : BaseUnit
 
         if(GameManager.Instance != null)
         {
+            GameManager.Instance.ProcessGameOver();
             // 게임 오버 등의 추가 처리를 추후에 한다.
             Debug.Log("게임 오버! 플레이어가 사망했습니다!");
         }
@@ -198,5 +202,17 @@ public class Player : BaseUnit
     public void AddDashDamage(float damage)
     {
         dashDamage += damage;
+    }
+
+    void UpdateHpUI()
+    {
+        if(currentHealth <= 0.0f)
+        {
+            UIManager.Instance.UpdateHpBar(0.0f);
+            return;
+        }
+
+        float percent = currentHealth / maxHealth;
+        UIManager.Instance.UpdateHpBar(percent);
     }
 }
