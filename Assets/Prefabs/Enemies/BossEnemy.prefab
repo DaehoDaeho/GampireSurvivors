@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7583288102921320824}
   - component: {fileID: 7778703575521402256}
   - component: {fileID: 900002075279575825}
+  - component: {fileID: 1480433314077137501}
   m_Layer: 7
   m_Name: BossEnemy
   m_TagString: Enemy
@@ -180,8 +181,8 @@ MonoBehaviour:
   randomExp: 0a000000140000001e000000
   originMoveSpeed: 0
   spriteRenderer: {fileID: 523865299388019695}
-  enemyController: {fileID: 0}
-  attackInterval: 0
+  enemyController: {fileID: 7778703575521402256}
+  attackInterval: 3
   damageAmount: 5
   currentPhase: 0
   phaseHealthRatio:
@@ -191,6 +192,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0.9433962, g: 0.4672481, b: 0.4672481, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  bossShooter: {fileID: 1480433314077137501}
 --- !u!114 &7778703575521402256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +209,7 @@ MonoBehaviour:
   rigidBody: {fileID: 7504120295619145963}
   enemyStat: {fileID: 7583288102921320824}
   spriteRenderer: {fileID: 523865299388019695}
-  attackRange: 2.5
+  attackRange: 10
   isAttacking: 0
   animator: {fileID: 900002075279575825}
 --- !u!95 &900002075279575825
@@ -232,3 +234,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1480433314077137501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3940197228252182657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc8e7c1bb7f64c47a9091727a2b2855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2462077665418350121, guid: 09cbc62773db14848b385d1e76bd8afc, type: 3}
+  projectileCount: 12
