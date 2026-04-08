@@ -81,6 +81,12 @@ public class UIUpgrade : UIBase
                     GameManager.Instance.bladeOrbitManager.AddBladeCount((int)upgradeDatas[index].upgradeValue);
                 }
                 break;
+
+            case UpgradeType.AddPierceCount:
+                {
+                    GameManager.Instance.AddPierceCount((int)upgradeDatas[index].upgradeValue);
+                }
+                break;
         }
 
         UIManager.Instance.CloseUI(UIType.Upgrade);

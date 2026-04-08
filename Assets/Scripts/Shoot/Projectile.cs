@@ -43,6 +43,9 @@ public class Projectile : MonoBehaviour
 
     private Vector2 moveDirection;
 
+    // 관통 카운트를 지정할 변수 선언.
+    private int pierceCount = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -171,13 +174,20 @@ public class Projectile : MonoBehaviour
 
         AudioManager.instance.PlaySFX(AudioType.Hit);
 
-        if(useObjectPooling == true)
+        if(pierceCount == 0)
         {
-            ReturnToPool();
+            if (useObjectPooling == true)
+            {
+                ReturnToPool();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
-            Destroy(gameObject);
+            --pierceCount;
         }
     }
 
@@ -242,5 +252,10 @@ public class Projectile : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         ReturnToPool();
+    }
+
+    public void SetPierceCount(int count)
+    {
+        pierceCount = count;
     }
 }

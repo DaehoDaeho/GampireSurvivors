@@ -32,6 +32,9 @@ public class AutoShooter : MonoBehaviour
     [SerializeField]
     private float aimDistance = 10.0f;
 
+    [SerializeField]
+    private int pierceCount = 0;
+
     private int shootCount = 0;
 
     // Update is called once per frame
@@ -105,6 +108,7 @@ public class AutoShooter : MonoBehaviour
                 float damage = projectileData.damage + upgradeDamage;
                 float moveSpeed = projectileData.moveSpeed + upgradeMoveSpeed;
                 proj.Setup(targetPosition, moveSpeed, damage);
+                proj.SetPierceCount(pierceCount);
             }
             else
             {
@@ -224,5 +228,10 @@ public class AutoShooter : MonoBehaviour
     void RefreshSpreadAngle()
     {
         spreadAngle = projectileCount * 10.0f;
+    }
+
+    public void AddPierceCount(int count)
+    {
+        pierceCount += count;
     }
 }

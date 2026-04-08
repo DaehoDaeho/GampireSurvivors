@@ -8,7 +8,8 @@ public enum UpgradeType
     ProjectileMoveSpeed = 2,
     ProjectileCount = 3,
     DashDamage = 4,
-    BladeCount = 5
+    BladeCount = 5,
+    AddPierceCount = 6
 }
 
 [System.Serializable]

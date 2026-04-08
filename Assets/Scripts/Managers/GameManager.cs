@@ -35,6 +35,16 @@ public class GameManager : MonoBehaviour
         //}
     }
 
+    private void Start()
+    {
+        UIManager.Instance.StartCount();
+    }
+
+    public void InitTimer()
+    {
+        playTime = 0.0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -59,6 +69,12 @@ public class GameManager : MonoBehaviour
         playTime += Time.deltaTime; // 이전 프레임에서 현재 프레임까지 오는데 걸린 시간.
                                     // 환경이 달라도 동일한 시간을 측정하게 해주는 표준 기능.
                                     // 프레임에 상관없이 일정한 속도로 움직이거나 시간을 처리할 때 사용.
+
+        int remainTime = (int)(playLimitTime - playTime);
+        if(remainTime <= 10)
+        {
+            UIManager.Instance.ShowRemainTime(remainTime);
+        }
 
         if(playTime >= playLimitTime)
         {
@@ -123,5 +139,13 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.OpenUI(UIType.GameOver);
         isGameOver = true;
+    }
+
+    public void AddPierceCount(int count)
+    {
+        if(autoShooter != null)
+        {
+            autoShooter.AddPierceCount(count);
+        }
     }
 }
